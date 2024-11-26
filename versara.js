@@ -5,7 +5,7 @@
 */
 
 //const apiBase = 'http://127.0.0.1:8080/api/';
-const apiBase = 'http://44.211.224.63:8080/api/';
+const apiBase = 'https://versara.ai:8080/api';
 
 function destroyContentElement(parentElementId) {
     if (document.getElementById(parentElementId) != null) {
