@@ -30,7 +30,7 @@ function initContentRefresh(parentElementId, contentId) {
     async function fetchNewContent() {
         try {
             // fetch all content
-            const resp = await fetch(apiBase + "get_content", {
+            const resp = await fetch(apiBase + "/get_content", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ content_id: contentId }),
