@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    /* Slightly lower projects section */
+    .projects-section {
+      padding-top: 7rem; /* Moves it slightly further down */
+    }
+
+    /* Project grid layout with more spacing */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; /* Increased spacing between rows and columns */
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Project card styling */
+    .project-card {
+      background-color: #fafafa;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    /* Hover effect */
+    .project-card:hover {
+      transform: scale(1.03);
+    }
+
+    /* Project images */
+    .project-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Clickable title styling */
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: black;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .project-title:hover {
+      color: #3273dc; /* Bulma primary blue */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="">
+        <img src="/assets/1.png" width="118" height="28">
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        $navbarBurgers.forEach(el => {
+          el.addEventListener('click', () => {
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      });
+    </script>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/index.html">Home</a>
+        <a class="navbar-item" target="_blank" href="/websiteresume.pdf">Resume</a>
+        <a class="navbar-item" href="/Projects/index.html">Projects</a>
+        <a class="navbar-item" href="/Blog/writing.html">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Projects Section -->
+  <section class="section projects-section">
+    <div class="container">
+      <h1 class="title is-3 has-text-weight-bold has-text-centered">My Projects</h1>
+      <div class="projects-grid">
+
+        <!-- Project 5 -->
+        <div class="project-card">
+          <a href="https://github.com/coho905/SPOT" class="project-title">Speak to terminal (SPOT)</a>
+          <img src="/assets/dashboard.png" alt="Startup Dashboard" class="project-image">
+          <p>Natural language interface with bash shell.</p>
+        </div>
+        
+        <!-- Project 1 -->
+        <div class="project-card">
+          <a href="/Projects/PHASM.html" class="project-title">PHASM</a>
+          <img src="/assets/phasm.png" alt="PHASM Project" class="project-image">
+          <p>Physics-informed neural nets to approximate differential equations</p>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <a href="/Projects/bcp.html" class="project-title">Breast Cancer Predictor</a>
+          <img src="/assets/bcp.png" alt="Breast Cancer Predictor" class="project-image">
+          <p>Predicting mammograms of tumors as malignant or benign.</p>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <a href="/Projects/RHSB.html" class="project-title">RHS Bathroom System</a>
+          <img src="/assets/rhsb.png" alt="RHS Bathroom System" class="project-image">
+          <p>Smart restroom monitoring for real-time occupancy tracking in HS.</p>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+          <a href="/Projects/sca.html" class="project-title">DermaVision</a>
+          <img src="/assets/sca.png" alt="Skin Cancer App" class="project-image">
+          <p>Web app that processes uploaded images and outputs whether skin is cancerous or not.</p>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card">
+          <a href="https://github.com/coho905/tse" class="project-title">Tiny Search Engine</a>
+          <img src="/assets/advfashion.png" alt="Adversarial Fashion" class="project-image">
+          <p>Implemented a search engine based on early Google algorithms, capable of crawling HTML pages, indexing and ranking results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
