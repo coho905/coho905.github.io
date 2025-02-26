@@ -365,13 +365,33 @@
       </head>
       <body>
         <!-- Navbar -->
-        <nav class="navbar">
-          <div class="navbar-menu">
-            <div class="navbar-start">
-              <a class="navbar-item" href="/">home</a> <a class="navbar-item" target="_blank" href="/websiteresume.pdf">resume</a> <a class="navbar-item" href="/Projects/index.html">projects</a> <a class="navbar-item" href="/Blog/writing.html">writing</a>
-            </div>
-          </div>
-        </nav>
+       <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/assets/1.png" width="118" height="28">
+      </a>
+
+      <!-- Navbar Burger (for mobile) -->
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <!-- Navbar Menu -->
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/index.html">Home</a>
+        <a class="navbar-item" target="_blank" href="/websiteresume.pdf">Resume</a>
+        <a class="navbar-item" href="/Projects/index.html">Projects</a>
+        <a class="navbar-item" href="/Blog/writing.html">Writing</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
 
         <!-- Hero Section -->
         <section class="hero-section" style="overflow: hidden;" id="hero">
@@ -397,6 +417,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 
         <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const burger = document.querySelector('.navbar-burger');
+    const menu = document.querySelector('#navbarMenu');
+
+    if (burger && menu) {
+      burger.addEventListener('click', function () {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    }
+  });
           // Particle.js configuration for hero section
           particlesJS('particles-js', {
             "particles": {
