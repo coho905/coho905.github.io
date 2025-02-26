@@ -360,6 +360,17 @@
         min-height: 100px;
       }
     }
+    #no-hover {
+      pointer-events: auto; /* Ensures link is clickable */
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+
+    #no-hover:hover {
+      text-decoration: none !important;
+      color: inherit !important;
+      transform: none !important;
+    }
   </style>
 </head>
 <body>
@@ -395,6 +406,7 @@
         <span class="active">"You don't understand something until you've <em>built it</em>." – Bret Victor</span>
         <span>"The best way to predict the future is to <em>invent it</em>." – Alan Kay</span>
         <span>"Simplicity is the ultimate <em>sophistication</em>." – Leonardo da Vinci</span>
+        <span>"Life i<a href='/writing/xu.html' id='no-hover'>s</a> the <em>flower</em> for which love i<a href='/writing/xu.html' id='no-hover'>s</a> the honey." - Victor Hugo</span>
         <span>"What we know is a drop, what we don't know is an <em>ocean</em>." – Isaac Newton</span>
         <span>"Impossible is a word to be found only in the dictionary of <em>fools</em>." – Napoleon Bonaparte</span>
         <span>"I wish I had <em>nothing</em> to do with it." – Werner Heisenberg</span>
