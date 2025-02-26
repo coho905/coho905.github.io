@@ -1,809 +1,809 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>writings</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="icon" type="image/png" href="/assets/favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="/assets/favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <style>
-    /* General Styling */
-    :root {
-      --primary: #6E44FF; /* Deep indigo */
-      --secondary: #FF4A6E; /* Vermilion */
-      --tertiary: #00D4D4; /* Teal */
-      --dark: #121222; /* Deep midnight */
-      --medium: #242436; /* Dark slate */
-      --light: #F4F2F7; /* Lavender white */
-      --text: #2A2A3C; /* Dark slate */
-      --accent1: #FFB4A2; /* Soft coral - matching Projects page */
-    }
-    
-    body {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-weight: 400;
-      margin: 0;
-      overflow-x: hidden;
-      background: var(--dark);
-      color: var(--light);
-      opacity: 0;
-      animation: fadeIn 1s ease-out forwards;
-    }
-    
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes expandLine {
-      from { width: 0; }
-      to { width: 60px; }
-    }
-    
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    @keyframes constellationFade {
-      0% { opacity: 0.1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 0.1; }
-    }
-    
-    @keyframes typewriter {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    
-    @keyframes blink {
-      from { border-right-color: var(--secondary); }
-      to { border-right-color: transparent; }
-    }
-    
-    @keyframes glowPulse {
-      0% { text-shadow: 0 0 5px rgba(110, 68, 255, 0); }
-      50% { text-shadow: 0 0 15px rgba(110, 68, 255, 0.5); }
-      100% { text-shadow: 0 0 5px rgba(110, 68, 255, 0); }
-    }
-    
-    /* Navbar - Matching Projects Page */
-    .navbar {
-      background-color: var(--dark);
-      padding: 1rem;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    .navbar-item {
-      color: var(--light) !important;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    
-    .navbar-item:after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 50%;
-      background-color: var(--accent1);
-      transition: all 0.3s ease;
-    }
-    
-    .navbar-item:hover:after {
-      width: 100%;
-      left: 0;
-    }
-    
-    .navbar-item:hover {
-      color: var(--accent1) !important;
-      transform: translateY(-2px);
-    }
-    
-    /* Writing Section */
-    .writing-section {
-      padding-top: 9rem;
-      min-height: 100vh;
-      text-align: center;
-      position: relative;
-    }
-    
-    /* Constellation Background */
-    .constellation-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
-    
-    .constellation-bg .star {
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      animation: constellationFade 3s infinite ease-in-out;
-    }
-    
-    /* Mysterious Gradient Overlay */
-    .gradient-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(110, 68, 255, 0.15) 0%, transparent 60%),
-        radial-gradient(circle at 80% 20%, rgba(255, 74, 110, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 10% 80%, rgba(0, 212, 212, 0.1) 0%, transparent 40%);
-    }
-    
-    /* Parallax Ink Effect */
-    .ink-blot {
-      position: fixed;
-      opacity: 0.03;
-      filter: blur(10px);
-      transform: rotate(var(--rotate));
-      pointer-events: none;
-      z-index: -3;
-    }
-    
-    /* Section Title */
-    .section-title {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 2rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      animation: 
-        slideUp 1s ease-out 0.2s forwards,
-        glowPulse 4s infinite 1s;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .section-title:after {
-      content: '';
-      position: absolute;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary));
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: expandLine 1.2s ease-out 0.8s forwards;
-    }
-    
-    .section-title:before {
-      content: """;
-      position: absolute;
-      left: -2rem;
-      top: -1rem;
-      font-size: 5rem;
-      color: var(--primary);
-      opacity: 0.2;
-    }
-    
-    /* Poetic Intro */
-    .poetic-intro {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-style: italic;
-      font-size: 1.3rem;
-      color: var(--light);
-      opacity: 0.9;
-      margin: 2rem auto;
-      max-width: 800px;
-      line-height: 1.8;
-      position: relative;
-      animation: slideUp 1s ease-out 0.5s forwards;
-      opacity: 0;
-    }
-    
-    .poetic-intro span {
-      color: var(--secondary);
-    }
-    
-    /* Writing Container */
-    .writing-container {
-      max-width: 1000px;
-      margin: 4rem auto;
-      padding: 0;
-      opacity: 0;
-      animation: slideUp 1s ease-out 0.4s forwards;
-      position: relative;
-      overflow: hidden;
-      background: transparent;
-    }
-    
-    /* Writing List */
-    .writing-list {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-    
-    .writing-list li {
-      position: relative;
-      transition: all 0.3s ease;
-      perspective: 1500px;
-    }
-    
-    .writing-card {
-      display: block;
-      color: var(--light);
-      text-decoration: none;
-      padding: 2.5rem;
-      border-radius: 12px;
-      background: rgba(36, 36, 54, 0.7);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      height: 100%;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      transform-style: preserve-3d;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(110, 68, 255, 0.1);
-    }
-    
-    .writing-card:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--tertiary));
-      background-size: 300% 300%;
-      opacity: 0;
-      z-index: -1;
-      transition: opacity 0.5s ease;
-      animation: gradientMove 6s ease infinite;
-    }
-    
-    .writing-card:after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
-      opacity: 0;
-      transform: scale(0.5);
-      transition: all 0.5s ease;
-    }
-    
-    .writing-card:hover {
-      transform: translateY(-15px) rotateX(10deg);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(110, 68, 255, 0.3);
-    }
-    
-    .writing-card:hover:before {
-      opacity: 0.8;
-    }
-    
-    .writing-card:hover:after {
-      opacity: 0.2;
-      transform: scale(1);
-    }
-    
-    .writing-card-title {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 2;
-      transition: all 0.3s ease;
-    }
-    
-    .writing-card:hover .writing-card-title {
-      transform: translateZ(50px);
-    }
-    
-    .writing-card i {
-      font-style: italic;
-      color: var(--tertiary);
-      transition: color 0.3s ease;
-    }
-    
-    .writing-card:hover i {
-      color: var(--light);
-    }
-    
-    /* Card Icons */
-    .card-icon {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 2rem;
-      opacity: 0.3;
-      transition: all 0.5s ease;
-      transform-style: preserve-3d;
-      color: var(--light);
-    }
-    
-    .writing-card:hover .card-icon {
-      opacity: 0.9;
-      transform: translateZ(70px) rotate(360deg) scale(1.3);
-      color: var(--tertiary);
-    }
-    
-    /* Reading Time Pill */
-    .reading-time {
-      display: inline-block;
-      padding: 0.3rem 0.8rem;
-      background: rgba(110, 68, 255, 0.15);
-      color: var(--primary);
-      border-radius: 50px;
-      font-size: 0.8rem;
-      margin-top: 1.5rem;
-      transition: all 0.3s ease;
-      transform-style: preserve-3d;
-    }
-    
-    .writing-card:hover .reading-time {
-      background: rgba(255, 255, 255, 0.2);
-      color: var(--light);
-      transform: translateZ(30px);
-    }
-    
-    /* Card Dividers - Mysterious Symbol */
-    .card-divider {
-      position: absolute;
-      bottom: 1rem;
-      left: 1rem;
-      width: 30px;
-      height: 30px;
-      opacity: 0.2;
-      transition: all 0.3s ease;
-    }
-    
-    .writing-card:hover .card-divider {
-      opacity: 0.7;
-      transform: rotate(180deg);
-    }
-    
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--dark);
-      color: var(--light);
-      margin-top: auto;
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid rgba(110, 68, 255, 0.2);
-    }
-    
-    .footer:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, 
-        transparent 0%, 
-        var(--primary) 20%, 
-        var(--secondary) 50%, 
-        var(--tertiary) 80%, 
-        transparent 100%);
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>writings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+      /* General Styling */
+      :root {
+        --primary: #6E44FF; /* Deep indigo */
+        --secondary: #FF4A6E; /* Vermilion */
+        --tertiary: #00D4D4; /* Teal */
+        --dark: #121222; /* Deep midnight */
+        --medium: #242436; /* Dark slate */
+        --light: #F4F2F7; /* Lavender white */
+        --text: #2A2A3C; /* Dark slate */
+        --accent1: #FFB4A2; /* Soft coral - matching Projects page */
+      }
+
+      body {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-weight: 400;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--dark);
+        color: var(--light);
+        opacity: 0;
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes expandLine {
+        from { width: 0; }
+        to { width: 60px; }
+      }
+
+      @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      @keyframes constellationFade {
+        0% { opacity: 0.1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 0.1; }
+      }
+
+      @keyframes typewriter {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+
+      @keyframes blink {
+        from { border-right-color: var(--secondary); }
+        to { border-right-color: transparent; }
+      }
+
+      @keyframes glowPulse {
+        0% { text-shadow: 0 0 5px rgba(110, 68, 255, 0); }
+        50% { text-shadow: 0 0 15px rgba(110, 68, 255, 0.5); }
+        100% { text-shadow: 0 0 5px rgba(110, 68, 255, 0); }
+      }
+
+      /* Navbar - Matching Projects Page */
+      .navbar {
+        background-color: #1E1E1E !important; /* Force background color for iPhone */
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .navbar-item {
+        color: var(--light) !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .navbar-item:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: var(--accent1);
+        transition: all 0.3s ease;
+      }
+
+      .navbar-item:hover:after {
+        width: 100%;
+        left: 0;
+      }
+
+      .navbar-item:hover {
+        color: var(--accent1) !important;
+        transform: translateY(-2px);
+      }
+
+      /* Writing Section */
+      .writing-section {
+        padding-top: 9rem;
+        min-height: 100vh;
+        text-align: center;
+        position: relative;
+      }
+
+      /* Constellation Background */
+      .constellation-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      .constellation-bg .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: constellationFade 3s infinite ease-in-out;
+      }
+
+      /* Mysterious Gradient Overlay */
+      .gradient-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background: 
+          radial-gradient(circle at 20% 30%, rgba(110, 68, 255, 0.15) 0%, transparent 60%),
+          radial-gradient(circle at 80% 20%, rgba(255, 74, 110, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 10% 80%, rgba(0, 212, 212, 0.1) 0%, transparent 40%);
+      }
+
+      /* Parallax Ink Effect */
+      .ink-blot {
+        position: fixed;
+        opacity: 0.03;
+        filter: blur(10px);
+        transform: rotate(var(--rotate));
+        pointer-events: none;
+        z-index: -3;
+      }
+
+      /* Section Title */
       .section-title {
-        font-size: 2.2rem;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        animation: 
+          slideUp 1s ease-out 0.2s forwards,
+          glowPulse 4s infinite 1s;
+        position: relative;
+        display: inline-block;
       }
-      
-      .writing-list {
-        grid-template-columns: 1fr;
+
+      .section-title:after {
+        content: '';
+        position: absolute;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary));
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: expandLine 1.2s ease-out 0.8s forwards;
       }
-      
+
+      .section-title:before {
+        content: """;
+        position: absolute;
+        left: -2rem;
+        top: -1rem;
+        font-size: 5rem;
+        color: var(--primary);
+        opacity: 0.2;
+      }
+
+      /* Poetic Intro */
       .poetic-intro {
-        font-size: 1.1rem;
-        max-width: 90%;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-style: italic;
+        font-size: 1.3rem;
+        color: var(--light);
+        opacity: 0.9;
+        margin: 2rem auto;
+        max-width: 800px;
+        line-height: 1.8;
+        position: relative;
+        animation: slideUp 1s ease-out 0.5s forwards;
+        opacity: 0;
       }
-    }
-  </style>
-</head>
-<body>
-  <!-- Dynamic Constellation Background -->
-  <div class="constellation-bg" id="constellation"></div>
-  
-  <!-- Mysterious Gradient Overlay -->
-  <div class="gradient-overlay"></div>
-  
-  <!-- Parallax Ink Blots -->
-  <div class="ink-blot" style="--rotate: 15deg; top: 20%; left: 5%; width: 500px; height: 500px;"></div>
-  <div class="ink-blot" style="--rotate: -25deg; bottom: 10%; right: 5%; width: 600px; height: 600px;"></div>
-  
-  <!-- Navbar -->
-  <nav class="navbar is-fixed-top">
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/">home</a>
-        <a class="navbar-item" target="_blank" href="/websiteresume.pdf">resume</a>
-        <a class="navbar-item" href="/Projects/index.html">projects</a>
-        <a class="navbar-item" href="/Blog/writing.html">writing</a>
+
+      .poetic-intro span {
+        color: var(--secondary);
+      }
+
+      /* Writing Container */
+      .writing-container {
+        max-width: 1000px;
+        margin: 4rem auto;
+        padding: 0;
+        opacity: 0;
+        animation: slideUp 1s ease-out 0.4s forwards;
+        position: relative;
+        overflow: hidden;
+        background: transparent;
+      }
+
+      /* Writing List */
+      .writing-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .writing-list li {
+        position: relative;
+        transition: all 0.3s ease;
+        perspective: 1500px;
+      }
+
+      .writing-card {
+        display: block;
+        color: var(--light);
+        text-decoration: none;
+        padding: 2.5rem;
+        border-radius: 12px;
+        background: rgba(36, 36, 54, 0.7);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        height: 100%;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        transform-style: preserve-3d;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(110, 68, 255, 0.1);
+      }
+
+      .writing-card:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary), var(--tertiary));
+        background-size: 300% 300%;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.5s ease;
+        animation: gradientMove 6s ease infinite;
+      }
+
+      .writing-card:after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.5s ease;
+      }
+
+      .writing-card:hover {
+        transform: translateY(-15px) rotateX(10deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(110, 68, 255, 0.3);
+      }
+
+      .writing-card:hover:before {
+        opacity: 0.8;
+      }
+
+      .writing-card:hover:after {
+        opacity: 0.2;
+        transform: scale(1);
+      }
+
+      .writing-card-title {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+      }
+
+      .writing-card:hover .writing-card-title {
+        transform: translateZ(50px);
+      }
+
+      .writing-card i {
+        font-style: italic;
+        color: var(--tertiary);
+        transition: color 0.3s ease;
+      }
+
+      .writing-card:hover i {
+        color: var(--light);
+      }
+
+      /* Card Icons */
+      .card-icon {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 2rem;
+        opacity: 0.3;
+        transition: all 0.5s ease;
+        transform-style: preserve-3d;
+        color: var(--light);
+      }
+
+      .writing-card:hover .card-icon {
+        opacity: 0.9;
+        transform: translateZ(70px) rotate(360deg) scale(1.3);
+        color: var(--tertiary);
+      }
+
+      /* Reading Time Pill */
+      .reading-time {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        background: rgba(110, 68, 255, 0.15);
+        color: var(--primary);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        margin-top: 1.5rem;
+        transition: all 0.3s ease;
+        transform-style: preserve-3d;
+      }
+
+      .writing-card:hover .reading-time {
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--light);
+        transform: translateZ(30px);
+      }
+
+      /* Card Dividers - Mysterious Symbol */
+      .card-divider {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        width: 30px;
+        height: 30px;
+        opacity: 0.2;
+        transition: all 0.3s ease;
+      }
+
+      .writing-card:hover .card-divider {
+        opacity: 0.7;
+        transform: rotate(180deg);
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 2rem;
+        background: var(--dark);
+        color: var(--light);
+        margin-top: auto;
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid rgba(110, 68, 255, 0.2);
+      }
+
+      .footer:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          var(--primary) 20%, 
+          var(--secondary) 50%, 
+          var(--tertiary) 80%, 
+          transparent 100%);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .section-title {
+          font-size: 2.2rem;
+        }
+
+        .writing-list {
+          grid-template-columns: 1fr;
+        }
+
+        .poetic-intro {
+          font-size: 1.1rem;
+          max-width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dynamic Constellation Background -->
+    <div class="constellation-bg" id="constellation"></div>
+
+    <!-- Mysterious Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+
+    <!-- Parallax Ink Blots -->
+    <div class="ink-blot" style="--rotate: 15deg; top: 20%; left: 5%; width: 500px; height: 500px;"></div>
+    <div class="ink-blot" style="--rotate: -25deg; bottom: 10%; right: 5%; width: 600px; height: 600px;"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar is-fixed-top">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/">home</a>
+          <a class="navbar-item" target="_blank" href="/websiteresume.pdf">resume</a>
+          <a class="navbar-item" href="/Projects/index.html">projects</a>
+          <a class="navbar-item" href="/Blog/writing.html">writing</a>
+        </div>
       </div>
-    </div>
-  </nav>
-  
-  <!-- Writing Section -->
-  <section class="section writing-section">
-    <div class="container">
-      <h1 class="section-title">
-        writings
-      </h1>
-      
-      <div class="poetic-intro">
-      Don’t take life too seriously; just a place for my thoughts, ideas, and experiences.”      </div>
-      
-      <div class="writing-container">
-        <ul class="writing-list">
-          <li>
-            <a href='/writing/courses.html' class="writing-card">
-              <!--<div class="card-icon">📚</div>-->
-              <div class="writing-card-title">Courses I've Taken @ Dartmouth</div>
-              <p>A list of classes taken and when, with particularly interesting ones bolded.</p>
-              <div class="reading-time">2 min</div>
-              <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
-                <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
-                <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href='/writing/properties.html' class="writing-card">
-              <!--<div class="card-icon">🎬</div>-->
-              <div class="writing-card-title">Properties</div>
-              <p>A look into the Vienna Circle's opinion on universals and other metaphysical objects.</p>
-              <div class="reading-time">7 min read</div>
-              <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
-                <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
-                <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <!--
-            <a href='/writing/ai-agents-assistants.html' class="writing-card">
-              <div class="card-icon">🤖</div>
-              <div class="writing-card-title">AI Assistant & Agents</div>
-              <p>The liminal space between tool and collaborator in cognitive partnerships.</p>
-              <div class="reading-time">8 min read</div>
-              <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
-                <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
-                <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href='/writing/her-loss.html' class="writing-card">
-              <div class="card-icon">🎵</div>
-              <div class="writing-card-title"><i>Her Loss</i> Album Review</div>
-              <p>Soundscapes of absence and desire; auditory reflections on modern relationships.</p>
-              <div class="reading-time">6 min read</div>
-              <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
-                <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
-                <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href='/writing/ai-creativity.html' class="writing-card">
-              <div class="card-icon">🎨</div>
-              <div class="writing-card-title">The AI Creativity Question</div>
-              <p>On the nature of novelty, meaning-making, and the uncanny valley of algorithmic expression.</p>
-              <div class="reading-time">10 min read</div>
-              <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
-                <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
-                <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href='/writing/super-intelligence.html' class="writing-card">
-              <div class="card-icon">🧠</div>
-              <div class="writing-card-title">Ethics of Superintelligence</div>
-              <p>Philosophical inquiries into the prometheus of silicon and the architectures of transcendence.</p>
-              <div class="reading-time">12 min read</div>
-              <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
-                <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
-                <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href='/writing/family-guy.html' class="writing-card">
-              <div class="card-icon">📺</div>
-              <div class="writing-card-title">A <i>Family Guy</i> Appreciation Post</div>
-              <p>On absurdism, postmodern meta-narrative, and the culturally referential zeitgeist.</p>
-              <div class="reading-time">4 min read</div>
-              <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
-                <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
-                <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </a>
-          </li>
-          -->
-        </ul>
+    </nav>
+
+    <!-- Writing Section -->
+    <section class="section writing-section">
+      <div class="container">
+        <h1 class="section-title">
+          writings
+        </h1>
+
+        <div class="poetic-intro">
+        Don’t take life too seriously; just a place for my thoughts, ideas, and experiences.”      </div>
+
+        <div class="writing-container">
+          <ul class="writing-list">
+            <li>
+              <a href='/writing/courses.html' class="writing-card">
+                <!--<div class="card-icon">📚</div>-->
+                <div class="writing-card-title">Courses I've Taken @ Dartmouth</div>
+                <p>A list of classes taken and when, with particularly interesting ones bolded.</p>
+                <div class="reading-time">2 min</div>
+                <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                  <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
+                  <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href='/writing/properties.html' class="writing-card">
+                <!--<div class="card-icon">🎬</div>-->
+                <div class="writing-card-title">Properties</div>
+                <p>A look into the Vienna Circle's opinion on universals and other metaphysical objects.</p>
+                <div class="reading-time">7 min read</div>
+                <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                  <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
+                  <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <!--
+              <a href='/writing/ai-agents-assistants.html' class="writing-card">
+                <div class="card-icon">🤖</div>
+                <div class="writing-card-title">AI Assistant & Agents</div>
+                <p>The liminal space between tool and collaborator in cognitive partnerships.</p>
+                <div class="reading-time">8 min read</div>
+                <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                  <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
+                  <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href='/writing/her-loss.html' class="writing-card">
+                <div class="card-icon">🎵</div>
+                <div class="writing-card-title"><i>Her Loss</i> Album Review</div>
+                <p>Soundscapes of absence and desire; auditory reflections on modern relationships.</p>
+                <div class="reading-time">6 min read</div>
+                <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                  <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
+                  <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href='/writing/ai-creativity.html' class="writing-card">
+                <div class="card-icon">🎨</div>
+                <div class="writing-card-title">The AI Creativity Question</div>
+                <p>On the nature of novelty, meaning-making, and the uncanny valley of algorithmic expression.</p>
+                <div class="reading-time">10 min read</div>
+                <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                  <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
+                  <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href='/writing/super-intelligence.html' class="writing-card">
+                <div class="card-icon">🧠</div>
+                <div class="writing-card-title">Ethics of Superintelligence</div>
+                <p>Philosophical inquiries into the prometheus of silicon and the architectures of transcendence.</p>
+                <div class="reading-time">12 min read</div>
+                <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                  <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
+                  <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href='/writing/family-guy.html' class="writing-card">
+                <div class="card-icon">📺</div>
+                <div class="writing-card-title">A <i>Family Guy</i> Appreciation Post</div>
+                <p>On absurdism, postmodern meta-narrative, and the culturally referential zeitgeist.</p>
+                <div class="reading-time">4 min read</div>
+                <svg class="card-divider" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                  <path d="M25,50 L75,50" stroke="currentColor" stroke-width="2" />
+                  <path d="M50,25 L50,75" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            </li>
+            -->
+          </ul>
+        </div>
       </div>
-    </div>
-  </section>
-  
-  <!-- Footer -
-  <footer class="footer">
-    © 2025 Colin Wolfe | <span style="font-style: italic; opacity: 0.7;">Cogito, ergo sum</span>
-  </footer>
-  -->
-  <script>
-    // Create constellation background
-    document.addEventListener('DOMContentLoaded', function() {
-      const constellation = document.getElementById('constellation');
-      const numStars = 150;
-      
-      // Create stars
-      for (let i = 0; i < numStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        
-        // Random size between 1-3px
-        const size = Math.random() * 2 + 1;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        
-        // Random position
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        
-        // Random animation delay
-        star.style.animationDelay = `${Math.random() * 5}s`;
-        
-        constellation.appendChild(star);
-      }
-      
-      // Create constellation lines
-      const numLines = 15;
-      for (let i = 0; i < numLines; i++) {
-        const line = document.createElement('div');
-        line.style.position = 'absolute';
-        line.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-        line.style.height = '1px';
-        
-        // Random position and size
-        const startX = Math.random() * 100;
-        const startY = Math.random() * 100;
-        const length = Math.random() * 10 + 5;
-        const angle = Math.random() * 360;
-        
-        line.style.width = `${length}%`;
-        line.style.left = `${startX}%`;
-        line.style.top = `${startY}%`;
-        line.style.transform = `rotate(${angle}deg)`;
-        
-        constellation.appendChild(line);
-      }
-      
-      // Create the ink blots
-      const blot1 = document.querySelector('.ink-blot:nth-child(1)');
-      const blot2 = document.querySelector('.ink-blot:nth-child(2)');
-      
-      // Draw SVG inkblots
-      blot1.innerHTML = `
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <path fill="${getComputedStyle(document.documentElement).getPropertyValue('--primary')}" d="M41.3,-67.3C55.9,-60.1,71.8,-53.1,79.6,-41C87.4,-28.9,87.2,-11.7,83.8,3.9C80.4,19.6,73.8,34,63.2,43.1C52.6,52.2,38,56.1,23.9,62.3C9.8,68.5,-3.7,77,-18.2,78C-32.7,79,-48.1,72.3,-57.8,61.2C-67.5,50,-71.5,34.5,-72.2,19.8C-72.9,5.1,-70.3,-8.8,-66.4,-22.2C-62.5,-35.6,-57.3,-48.5,-47.5,-57.7C-37.7,-66.9,-23.3,-72.4,-8.5,-71.6C6.2,-70.8,26.8,-74.5,41.3,-67.3Z" transform="translate(100 100)" />
-        </svg>
-      `;
-      
-      blot2.innerHTML = `
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <path fill="${getComputedStyle(document.documentElement).getPropertyValue('--secondary')}" d="M43.4,-75.3C57.1,-68.3,69.8,-58.7,77.2,-45.7C84.7,-32.7,86.9,-16.3,85.3,-1C83.7,14.4,78.2,28.7,70.8,42.1C63.3,55.5,53.7,67.8,41.3,75.7C28.9,83.5,14.4,86.8,-0.1,87C-14.6,87.2,-29.2,84.4,-42.9,77.6C-56.6,70.8,-69.4,60.1,-76.4,46.4C-83.5,32.7,-84.9,16.3,-84.3,0.3C-83.8,-15.6,-81.2,-31.3,-72.6,-42.8C-63.9,-54.4,-49.1,-61.8,-35.2,-68.8C-21.3,-75.8,-10.7,-82.3,2.1,-85.8C14.8,-89.2,29.7,-82.4,43.4,-75.3Z" transform="translate(100 100)" />
-        </svg>
-      `;
-      
-      // Parallax effect on ink blots
-      document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        blot1.style.transform = `translate(${x * 20 - 10}px, ${y * 20 - 10}px) rotate(15deg)`;
-        blot2.style.transform = `translate(${-x * 20 + 10}px, ${-y * 20 + 10}px) rotate(-25deg)`;
-      });
-      
-      // Staggered entrance animation for writing cards
-      const cards = document.querySelectorAll('.writing-list li');
-      
-      cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px)';
-        
-        setTimeout(() => {
-          card.style.transition = 'all 0.8s cubic-bezier(0.2, 1, 0.3, 1)';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, 300 + (index * 150));
-      });
-      
-      // Interactive constellation background
-      document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        // Add a subtle parallax effect to stars
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => {
-          const depth = Math.random() * 2;
-          const moveX = (x - 0.5) * depth * 20;
-          const moveY = (y - 0.5) * depth * 20;
-          
-          star.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-      });
-      
-      // 3D hover effect on cards
-      document.querySelectorAll('.writing-card').forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-          const rect = this.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const angleX = (y - centerY) / 15;
-          const angleY = (centerX - x) / 15;
-          
-          this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(20px)`;
-          
-          // Move highlight effect
-          // Move highlight effect
-          const highlight = this.querySelector('.card-highlight');
-          if (highlight) {
-            const percentX = x / rect.width;
-            const percentY = y / rect.height;
-            highlight.style.left = `${percentX * 100}%`;
-            highlight.style.top = `${percentY * 100}%`;
-          }
-          });
+    </section>
 
-          card.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-          });
-          });
-          });
+    <!-- Footer -
+    <footer class="footer">
+      © 2025 Colin Wolfe | <span style="font-style: italic; opacity: 0.7;">Cogito, ergo sum</span>
+    </footer>
+    -->
+    <script>
+      // Create constellation background
+      document.addEventListener('DOMContentLoaded', function() {
+        const constellation = document.getElementById('constellation');
+        const numStars = 150;
 
-          // Add glowing effect on scroll
-          window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            const title = document.querySelector('.section-title');
+        // Create stars
+        for (let i = 0; i < numStars; i++) {
+          const star = document.createElement('div');
+          star.classList.add('star');
 
-            // Adjust title glow intensity based on scroll
-            if (title) {
-              const glowIntensity = Math.min(scrollPosition / 500, 1);
-              title.style.textShadow = `0 0 ${10 + glowIntensity * 15}px rgba(110, 68, 255, ${0.2 + glowIntensity * 0.3})`;
-            }
+          // Random size between 1-3px
+          const size = Math.random() * 2 + 1;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
 
-            // Parallax effect for constellation background
-            const stars = document.querySelectorAll('.star');
-            stars.forEach(star => {
-              star.style.transform = `translateY(${scrollPosition * 0.1}px)`;
-            });
-          });
+          // Random position
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
 
-          // Add card highlights on load
-          document.querySelectorAll('.writing-card').forEach(card => {
-            const highlight = document.createElement('div');
-            highlight.classList.add('card-highlight');
-            highlight.style.position = 'absolute';
-            highlight.style.width = '150px';
-            highlight.style.height = '150px';
-            highlight.style.background = 'radial-gradient(circle, rgba(110, 68, 255, 0.2) 0%, transparent 70%)';
-            highlight.style.borderRadius = '50%';
-            highlight.style.pointerEvents = 'none';
-            highlight.style.transform = 'translate(-50%, -50%)';
-            highlight.style.opacity = '0';
-            highlight.style.transition = 'opacity 0.3s ease';
+          // Random animation delay
+          star.style.animationDelay = `${Math.random() * 5}s`;
 
-            card.style.position = 'relative';
-            card.style.overflow = 'hidden';
-            card.appendChild(highlight);
+          constellation.appendChild(star);
+        }
 
-            card.addEventListener('mouseenter', () => {
-              highlight.style.opacity = '1';
-            });
+        // Create constellation lines
+        const numLines = 15;
+        for (let i = 0; i < numLines; i++) {
+          const line = document.createElement('div');
+          line.style.position = 'absolute';
+          line.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+          line.style.height = '1px';
 
-            card.addEventListener('mouseleave', () => {
-              highlight.style.opacity = '0';
-            });
-          });
-    // Change color theme to metallic, grunge, intellectual style
-    document.addEventListener('DOMContentLoaded', function () {
-      // Update CSS variables with new refined color scheme
-      const root = document.documentElement;
+          // Random position and size
+          const startX = Math.random() * 100;
+          const startY = Math.random() * 100;
+          const length = Math.random() * 10 + 5;
+          const angle = Math.random() * 360;
 
-      // Modern color palette - mix of professional and creative
-      root.style.setProperty('--primary', '#FFB4A2'); // Lobster Pink
-      root.style.setProperty('--secondary', '#8A8D91'); // Metallic Grey
-      root.style.setProperty('--tertiary', '#A67C00'); // Darker Gold (Accent)
-      root.style.setProperty('--dark', '#121212'); // Near Black
-      root.style.setProperty('--medium', '#2A2A2A'); // Dark Grey
-      root.style.setProperty('--light', '#E8E8E8'); // Light Grey
-      root.style.setProperty('--text', '#3D3929'); // Deep Grey-Brown for readability
-      root.style.setProperty('--accent1', '#FFB4A2'); // Main Accent Color (Lobster Pink)
+          line.style.width = `${length}%`;
+          line.style.left = `${startX}%`;
+          line.style.top = `${startY}%`;
+          line.style.transform = `rotate(${angle}deg)`;
 
-      // Update gradient overlay with refined tones
-      const gradientOverlay = document.querySelector('.gradient-overlay');
-      if (gradientOverlay) {
-        gradientOverlay.style.background = `
-          radial-gradient(circle at 20% 30%, rgba(255, 180, 162, 0.2) 0%, transparent 60%), 
-          radial-gradient(circle at 80% 20%, rgba(138, 141, 145, 0.1) 0%, transparent 50%), 
-          radial-gradient(circle at 10% 80%, rgba(255, 180, 162, 0.15) 0%, transparent 40%)
-        `;
-      }
+          constellation.appendChild(line);
+        }
 
-      // Update ink blots with softer color tones
-      const blot1 = document.querySelector('.ink-blot:nth-child(1)');
-      const blot2 = document.querySelector('.ink-blot:nth-child(2)');
+        // Create the ink blots
+        const blot1 = document.querySelector('.ink-blot:nth-child(1)');
+        const blot2 = document.querySelector('.ink-blot:nth-child(2)');
 
-      if (blot1) {
+        // Draw SVG inkblots
         blot1.innerHTML = `
           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#FFB4A2" d="M41.3,-67.3C55.9,-60.1,71.8,-53.1,79.6,-41C87.4,-28.9,87.2,-11.7,83.8,3.9C80.4,19.6,73.8,34,63.2,43.1C52.6,52.2,38,56.1,23.9,62.3C9.8,68.5,-3.7,77,-18.2,78C-32.7,79,-48.1,72.3,-57.8,61.2C-67.5,50,-71.5,34.5,-72.2,19.8C-72.9,5.1,-70.3,-8.8,-66.4,-22.2C-62.5,-35.6,-57.3,-48.5,-47.5,-57.7C-37.7,-66.9,-23.3,-72.4,-8.5,-71.6C6.2,-70.8,26.8,-74.5,41.3,-67.3Z" transform="translate(100 100)" />
+            <path fill="${getComputedStyle(document.documentElement).getPropertyValue('--primary')}" d="M41.3,-67.3C55.9,-60.1,71.8,-53.1,79.6,-41C87.4,-28.9,87.2,-11.7,83.8,3.9C80.4,19.6,73.8,34,63.2,43.1C52.6,52.2,38,56.1,23.9,62.3C9.8,68.5,-3.7,77,-18.2,78C-32.7,79,-48.1,72.3,-57.8,61.2C-67.5,50,-71.5,34.5,-72.2,19.8C-72.9,5.1,-70.3,-8.8,-66.4,-22.2C-62.5,-35.6,-57.3,-48.5,-47.5,-57.7C-37.7,-66.9,-23.3,-72.4,-8.5,-71.6C6.2,-70.8,26.8,-74.5,41.3,-67.3Z" transform="translate(100 100)" />
           </svg>
         `;
-      }
 
-      if (blot2) {
         blot2.innerHTML = `
           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#8A8D91" d="M43.4,-75.3C57.1,-68.3,69.8,-58.7,77.2,-45.7C84.7,-32.7,86.9,-16.3,85.3,-1C83.7,14.4,78.2,28.7,70.8,42.1C63.3,55.5,53.7,67.8,41.3,75.7C28.9,83.5,14.4,86.8,-0.1,87C-14.6,87.2,-29.2,84.4,-42.9,77.6C-56.6,70.8,-69.4,60.1,-76.4,46.4C-83.5,32.7,-84.9,16.3,-84.3,0.3C-83.8,-15.6,-81.2,-31.3,-72.6,-42.8C-63.9,-54.4,-49.1,-61.8,-35.2,-68.8C-21.3,-75.8,-10.7,-82.3,2.1,-85.8C14.8,-89.2,29.7,-82.4,43.4,-75.3Z" transform="translate(100 100)" />
+            <path fill="${getComputedStyle(document.documentElement).getPropertyValue('--secondary')}" d="M43.4,-75.3C57.1,-68.3,69.8,-58.7,77.2,-45.7C84.7,-32.7,86.9,-16.3,85.3,-1C83.7,14.4,78.2,28.7,70.8,42.1C63.3,55.5,53.7,67.8,41.3,75.7C28.9,83.5,14.4,86.8,-0.1,87C-14.6,87.2,-29.2,84.4,-42.9,77.6C-56.6,70.8,-69.4,60.1,-76.4,46.4C-83.5,32.7,-84.9,16.3,-84.3,0.3C-83.8,-15.6,-81.2,-31.3,-72.6,-42.8C-63.9,-54.4,-49.1,-61.8,-35.2,-68.8C-21.3,-75.8,-10.7,-82.3,2.1,-85.8C14.8,-89.2,29.7,-82.4,43.4,-75.3Z" transform="translate(100 100)" />
           </svg>
         `;
-      }
 
-      // Update constellation stars to use Lobster Pink + Metallic accents
-      const stars = document.querySelectorAll('.star');
-      stars.forEach(star => {
-        // Assign a balanced mix of colors
-        const colors = ['#FFB4A2', '#8A8D91', '#E8E8E8', '#BFA46F'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        star.style.backgroundColor = randomColor;
-        star.style.opacity = '0.7';
+        // Parallax effect on ink blots
+        document.addEventListener('mousemove', (e) => {
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
+
+          blot1.style.transform = `translate(${x * 20 - 10}px, ${y * 20 - 10}px) rotate(15deg)`;
+          blot2.style.transform = `translate(${-x * 20 + 10}px, ${-y * 20 + 10}px) rotate(-25deg)`;
+        });
+
+        // Staggered entrance animation for writing cards
+        const cards = document.querySelectorAll('.writing-list li');
+
+        cards.forEach((card, index) => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(50px)';
+
+          setTimeout(() => {
+            card.style.transition = 'all 0.8s cubic-bezier(0.2, 1, 0.3, 1)';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 300 + (index * 150));
+        });
+
+        // Interactive constellation background
+        document.addEventListener('mousemove', (e) => {
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
+
+          // Add a subtle parallax effect to stars
+          const stars = document.querySelectorAll('.star');
+          stars.forEach(star => {
+            const depth = Math.random() * 2;
+            const moveX = (x - 0.5) * depth * 20;
+            const moveY = (y - 0.5) * depth * 20;
+
+            star.style.transform = `translate(${moveX}px, ${moveY}px)`;
+          });
+        });
+
+        // 3D hover effect on cards
+        document.querySelectorAll('.writing-card').forEach(card => {
+          card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const angleX = (y - centerY) / 15;
+            const angleY = (centerX - x) / 15;
+
+            this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(20px)`;
+
+            // Move highlight effect
+            // Move highlight effect
+            const highlight = this.querySelector('.card-highlight');
+            if (highlight) {
+              const percentX = x / rect.width;
+              const percentY = y / rect.height;
+              highlight.style.left = `${percentX * 100}%`;
+              highlight.style.top = `${percentY * 100}%`;
+            }
+            });
+
+            card.addEventListener('mouseleave', function() {
+              this.style.transform = '';
+            });
+            });
+            });
+
+            // Add glowing effect on scroll
+            window.addEventListener('scroll', () => {
+              const scrollPosition = window.scrollY;
+              const title = document.querySelector('.section-title');
+
+              // Adjust title glow intensity based on scroll
+              if (title) {
+                const glowIntensity = Math.min(scrollPosition / 500, 1);
+                title.style.textShadow = `0 0 ${10 + glowIntensity * 15}px rgba(110, 68, 255, ${0.2 + glowIntensity * 0.3})`;
+              }
+
+              // Parallax effect for constellation background
+              const stars = document.querySelectorAll('.star');
+              stars.forEach(star => {
+                star.style.transform = `translateY(${scrollPosition * 0.1}px)`;
+              });
+            });
+
+            // Add card highlights on load
+            document.querySelectorAll('.writing-card').forEach(card => {
+              const highlight = document.createElement('div');
+              highlight.classList.add('card-highlight');
+              highlight.style.position = 'absolute';
+              highlight.style.width = '150px';
+              highlight.style.height = '150px';
+              highlight.style.background = 'radial-gradient(circle, rgba(110, 68, 255, 0.2) 0%, transparent 70%)';
+              highlight.style.borderRadius = '50%';
+              highlight.style.pointerEvents = 'none';
+              highlight.style.transform = 'translate(-50%, -50%)';
+              highlight.style.opacity = '0';
+              highlight.style.transition = 'opacity 0.3s ease';
+
+              card.style.position = 'relative';
+              card.style.overflow = 'hidden';
+              card.appendChild(highlight);
+
+              card.addEventListener('mouseenter', () => {
+                highlight.style.opacity = '1';
+              });
+
+              card.addEventListener('mouseleave', () => {
+                highlight.style.opacity = '0';
+              });
+            });
+      // Change color theme to metallic, grunge, intellectual style
+      document.addEventListener('DOMContentLoaded', function () {
+        // Update CSS variables with new refined color scheme
+        const root = document.documentElement;
+
+        // Modern color palette - mix of professional and creative
+        root.style.setProperty('--primary', '#FFB4A2'); // Lobster Pink
+        root.style.setProperty('--secondary', '#8A8D91'); // Metallic Grey
+        root.style.setProperty('--tertiary', '#A67C00'); // Darker Gold (Accent)
+        root.style.setProperty('--dark', '#121212'); // Near Black
+        root.style.setProperty('--medium', '#2A2A2A'); // Dark Grey
+        root.style.setProperty('--light', '#E8E8E8'); // Light Grey
+        root.style.setProperty('--text', '#3D3929'); // Deep Grey-Brown for readability
+        root.style.setProperty('--accent1', '#FFB4A2'); // Main Accent Color (Lobster Pink)
+
+        // Update gradient overlay with refined tones
+        const gradientOverlay = document.querySelector('.gradient-overlay');
+        if (gradientOverlay) {
+          gradientOverlay.style.background = `
+            radial-gradient(circle at 20% 30%, rgba(255, 180, 162, 0.2) 0%, transparent 60%), 
+            radial-gradient(circle at 80% 20%, rgba(138, 141, 145, 0.1) 0%, transparent 50%), 
+            radial-gradient(circle at 10% 80%, rgba(255, 180, 162, 0.15) 0%, transparent 40%)
+          `;
+        }
+
+        // Update ink blots with softer color tones
+        const blot1 = document.querySelector('.ink-blot:nth-child(1)');
+        const blot2 = document.querySelector('.ink-blot:nth-child(2)');
+
+        if (blot1) {
+          blot1.innerHTML = `
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#FFB4A2" d="M41.3,-67.3C55.9,-60.1,71.8,-53.1,79.6,-41C87.4,-28.9,87.2,-11.7,83.8,3.9C80.4,19.6,73.8,34,63.2,43.1C52.6,52.2,38,56.1,23.9,62.3C9.8,68.5,-3.7,77,-18.2,78C-32.7,79,-48.1,72.3,-57.8,61.2C-67.5,50,-71.5,34.5,-72.2,19.8C-72.9,5.1,-70.3,-8.8,-66.4,-22.2C-62.5,-35.6,-57.3,-48.5,-47.5,-57.7C-37.7,-66.9,-23.3,-72.4,-8.5,-71.6C6.2,-70.8,26.8,-74.5,41.3,-67.3Z" transform="translate(100 100)" />
+            </svg>
+          `;
+        }
+
+        if (blot2) {
+          blot2.innerHTML = `
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#8A8D91" d="M43.4,-75.3C57.1,-68.3,69.8,-58.7,77.2,-45.7C84.7,-32.7,86.9,-16.3,85.3,-1C83.7,14.4,78.2,28.7,70.8,42.1C63.3,55.5,53.7,67.8,41.3,75.7C28.9,83.5,14.4,86.8,-0.1,87C-14.6,87.2,-29.2,84.4,-42.9,77.6C-56.6,70.8,-69.4,60.1,-76.4,46.4C-83.5,32.7,-84.9,16.3,-84.3,0.3C-83.8,-15.6,-81.2,-31.3,-72.6,-42.8C-63.9,-54.4,-49.1,-61.8,-35.2,-68.8C-21.3,-75.8,-10.7,-82.3,2.1,-85.8C14.8,-89.2,29.7,-82.4,43.4,-75.3Z" transform="translate(100 100)" />
+            </svg>
+          `;
+        }
+
+        // Update constellation stars to use Lobster Pink + Metallic accents
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+          // Assign a balanced mix of colors
+          const colors = ['#FFB4A2', '#8A8D91', '#E8E8E8', '#BFA46F'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          star.style.backgroundColor = randomColor;
+          star.style.opacity = '0.7';
+        });
       });
-    });
-          </script>
-          </body>
-          </html>
+            </script>
+            </body>
+            </html>
