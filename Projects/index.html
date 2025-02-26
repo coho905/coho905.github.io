@@ -4,103 +4,376 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>projects</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
   <style>
-    /* Slightly lower projects section */
-    .projects-section {
-      padding-top: 7rem; /* Moves it slightly further down */
+    /* General Styling */
+    body {
+      font-family: "IBM Plex Sans", sans-serif;
+      font-weight: 400;
+      margin: 0;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+      color: #F2F2F2;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
     }
-
-    /* Project grid layout with more spacing */
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px rgba(255, 180, 162, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(255, 180, 162, 0.8); }
+      100% { box-shadow: 0 0 10px rgba(255, 180, 162, 0.5); }
+    }
+    
+    /* Navbar */
+    .navbar {
+      background-color: #1E1E1E;
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navbar-item {
+      color: #F2F2F2 !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .navbar-item:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: #FFB4A2;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-item:hover:after {
+      width: 100%;
+      left: 0;
+    }
+    
+    .navbar-item:hover {
+      color: #FFB4A2 !important;
+      transform: translateY(-2px);
+    }
+    
+    /* Projects Section */
+    .projects-section {
+      padding-top: 9rem;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+    }
+    
+    /* Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    /* Section Title */
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #FFB4A2;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      animation: slideUp 1s ease-out 0.2s forwards;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 3px;
+      background-color: #FFB4A2;
+      bottom: -10px;
+      left: 20%;
+      transform: scaleX(0);
+      transition: transform 1s ease;
+      animation: expandLine 1.2s ease-out 0.8s forwards;
+    }
+    
+    @keyframes expandLine {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    
+    /* Centered Quote */
+    .quote-container {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #F2F2F2;
+      text-align: center;
+      position: relative;
+      min-height: 80px;
+      margin: 2rem auto 4rem;
+      max-width: 900px;
+      opacity: 0;
+      animation: slideUp 1s ease-out 0.4s forwards;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background: rgba(30, 30, 30, 0.6);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 180, 162, 0.2);
+    }
+    
+    .quote-container span {
+      display: inline-block;
+      opacity: 0;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: absolute;
+      width: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+    }
+    
+    .quote-container span.active {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    .quote-container span em {
+      color: #FFB4A2;
+      font-weight: 600;
+    }
+    
+    /* Project Grid */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem; /* Increased spacing between rows and columns */
-      max-width: 1000px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 1.5rem;
+      opacity: 0;
+      animation: slideUp 1s ease-out 0.6s forwards;
     }
-
-    /* Project card styling */
+    
+    /* Project Card */
     .project-card {
-      background-color: #fafafa;
+      background: rgba(30, 30, 30, 0.7);
       border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       text-align: center;
-      transition: transform 0.2s ease-in-out;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 180, 162, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
     }
-
-    /* Hover effect */
-    .project-card:hover {
-      transform: scale(1.03);
-    }
-
-    /* Project images */
-    .project-image {
+    
+    .project-card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      border-radius: 8px;
+      height: 5px;
+      background: linear-gradient(90deg, #FFB4A2, #FF8A80);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
     }
-
-    /* Clickable title styling */
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      animation: glow 3s infinite;
+    }
+    
+    .project-card:hover:before {
+      transform: scaleX(1);
+    }
+    
+    /* Project Title */
     .project-title {
-      font-size: 1.25rem;
+      font-size: 1.6rem;
       font-weight: bold;
-      color: black;
+      color: #FFB4A2;
       text-decoration: none;
-      transition: color 0.2s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
-
-    .project-title:hover {
-      color: #3273dc; /* Bulma primary blue */
+    
+    .project-title:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FFB4A2;
+      transition: width 0.3s ease;
     }
-
-    /* Responsive adjustments */
+    
+    .project-card:hover .project-title {
+      color: #F2F2F2;
+    }
+    
+    .project-card:hover .project-title:after {
+      width: 100%;
+    }
+    
+    /* Project Description */
+    .project-description {
+      color: rgba(242, 242, 242, 0.8);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .project-card:hover .project-description {
+      color: rgba(242, 242, 242, 1);
+    }
+    
+    /* Tech Tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .tech-tag {
+      background: rgba(255, 180, 162, 0.15);
+      color: #FFB4A2;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+    
+    .project-card:hover .tech-tag {
+      background: rgba(255, 180, 162, 0.3);
+      transform: scale(1.05);
+    }
+    
+    /* Floating Elements */
+    .floating-element {
+      position: absolute;
+      z-index: -1;
+      opacity: 0.5;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+    
+    .floating-element-1 {
+      top: 15%;
+      left: 5%;
+      width: 100px;
+      height: 100px;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      background: linear-gradient(45deg, #FFB4A2, transparent);
+      animation: float 10s infinite ease-in-out;
+    }
+    
+    .floating-element-2 {
+      top: 60%;
+      right: 8%;
+      width: 150px;
+      height: 150px;
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      background: linear-gradient(45deg, #FF8A80, transparent);
+      animation: float 12s infinite ease-in-out reverse;
+    }
+    
+    .floating-element-3 {
+      bottom: 10%;
+      left: 15%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+      background: linear-gradient(45deg, #FFD180, transparent);
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    /* Responsive Adjustments */
     @media (max-width: 1024px) {
       .projects-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2.5rem;
       }
     }
-
+    
     @media (max-width: 768px) {
       .projects-grid {
         grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .quote-container {
+        font-size: 1.2rem;
+        min-height: 100px;
       }
     }
   </style>
 </head>
 <body>
-
+  <!-- Floating Background Elements -->
+  <div class="floating-element floating-element-1"></div>
+  <div class="floating-element floating-element-2"></div>
+  <div class="floating-element floating-element-3"></div>
+  
+  <!-- Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  
   <!-- Navbar -->
-  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="">
-        <img src="/assets/1.png" width="118" height="28">
-      </a>
-
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-        $navbarBurgers.forEach(el => {
-          el.addEventListener('click', () => {
-            const target = el.dataset.target;
-            const $target = document.getElementById(target);
-            el.classList.toggle('is-active');
-            $target.classList.toggle('is-active');
-          });
-        });
-      });
-    </script>
-
-     <div id="navbarBasicExample" class="navbar-menu">
+  <nav class="navbar is-fixed-top">
+    <div class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item" href="/index.html">home</a>
         <a class="navbar-item" target="_blank" href="/websiteresume.pdf">resume</a>
@@ -109,68 +382,289 @@
       </div>
     </div>
   </nav>
-<br>
+  
   <!-- Projects Section -->
   <section class="section projects-section">
     <div class="container">
-      <h1 class="title is-3 has-text-weight-bold has-text-centered">My Projects</h1>
-      <div class="projects-grid">
-
-        <!-- Project 5 -->
-        <div class="project-card">
-          <a href="https://github.com/coho905/SPOT" target='_blank' class="project-title">Speak to terminal (SPOT)</a>
-          <p>Natural language spoken interface with bash shell.</p>
-        </div>
-        
-        <!-- Project 1 -->
-        <div class="project-card">
-          <a href="/Projects/PHASM.html" class="project-title">PHASM</a>
-          <p>Physics-informed neural nets to approximate differential equations</p>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card">
-          <a href="/Projects/bcp.html" class="project-title">Breast Cancer Predictor</a>
-          <p>Predicting mammograms of tumors as malignant or benign.</p>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-card">
-          <a href="/Projects/RHSB.html" class="project-title">RHS Bathroom System</a>
-          <p>Smart restroom monitoring for real-time occupancy tracking in HS.</p>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project-card">
-          <a href="/Projects/sca.html" class="project-title">DermaVision</a>
-          <p>Web app that processes uploaded images and outputs whether skin is cancerous or not.</p>
-        </div>
-
-        <!-- Project 6 -->
-        <div class="project-card">
-          <a href="https://github.com/coho905/tse" target='_blank' class="project-title">Tiny Search Engine</a>
-          <p>Implemented a search engine based on early Google algorithms, capable of crawling HTML pages, indexing and ranking results.</p>
-        </div>
-        <!-- Project 3 -->
-        <div class="project-card">
-          <a href="https://github.com/coho905/rwc" target='_blank' class="project-title">rwc</a>
-          <p>Rust implementation of the wc bash command</p>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project-card">
-          <a href="https://github.com/coho905/Posify" target='_blank' class="project-title">Posify</a>
-          <p>An NLP tool to tag parts of speech in sentences</p>
-        </div>
-
-        <!-- Project 6 -->
-        <div class="project-card">
-          <a href="https://github.com/coho905/FileCompressor" target='_blank' class="project-title">File Compressor</a>
-          <p>Zero-loss file compression and decompression using Huffman encoding.</p>
-        </div>
+      <h1 class="section-title">
+        my projects
+      </h1>
+      
+      <!-- Rotating Quote Section -->
+      <div class="quote-container">
+        <span class="active">"You don't understand something until you've <em>built it</em>." – Bret Victor</span>
+        <span>"The best way to predict the future is to <em>invent it</em>." – Alan Kay</span>
+        <span>"Simplicity is the ultimate <em>sophistication</em>." – Leonardo da Vinci</span>
+        <span>"What we know is a drop, what we don't know is an <em>ocean</em>." – Isaac Newton</span>
+        <span>"Impossible is a word to be found only in the dictionary of <em>fools</em>." – Napoleon Bonaparte</span>
+        <span>"I wish I had <em>nothing</em> to do with it." – Werner Heisenberg</span>
+        <span>"The mind is not a vessel to be filled, but a <em>fire</em> to be kindled." – Plutarch</span>
+        <span>"Do what you can, with what you have, <em>where you are</em>." – Theodore Roosevelt</span>
+        <span>"The measure of intelligence is the ability to <em>change</em>." – Albert Einstein</span>
+        <span>"For what shall it profit a man, if he shall gain the whole world, and <em>lose his own soul</em>?" – Jesus Christ</span>
       </div>
-    </div>
-  </section>
+      
+      <div class="projects-grid">
+        <div class="project-card">
+          <div>
+            <a href="https://github.com/coho905/SPOT" target='_blank' class="project-title">Speak to Terminal (SPOT)</a>
+            <p class="project-description">Natural language spoken interface with bash shell.</p>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">NLP</span>
+            <span class="tech-tag">Bash</span>
+            </div>
+            </div>
 
-</body>
-</html>
+            <div class="project-card">
+            <div>
+            <a href="/Projects/PHASM.html" class="project-title">PHASM</a>
+            <p class="project-description">Physics-informed neural nets to approximate differential equations.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">Neural Networks</span>
+            <span class="tech-tag">Physics</span>
+            </div>
+            </div>
+
+            <div class="project-card">
+            <div>
+            <a href="/Projects/bcp.html" class="project-title">Breast Cancer Predictor</a>
+            <p class="project-description">Predicting mammograms of tumors as malignant or benign.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">ML</span>
+            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">Healthcare</span>
+            </div>
+            </div>
+
+            <div class="project-card">
+            <div>
+            <a href="/Projects/RHSB.html" class="project-title">RHS Bathroom System</a>
+            <p class="project-description">Smart restroom monitoring for real-time occupancy tracking.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">IoT</span>
+            <span class="tech-tag">Sensors</span>
+            <span class="tech-tag">Real-time</span>
+            </div>
+            </div>
+
+            <div class="project-card">
+            <div>
+            <a href="/Projects/sca.html" class="project-title">DermaVision</a>
+            <p class="project-description">Web app for skin cancer detection from uploaded images.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">Computer Vision</span>
+            <span class="tech-tag">Healthcare</span>
+            <span class="tech-tag">Web</span>
+            </div>
+            </div>
+
+            <div class="project-card">
+            <div>
+            <a href="https://github.com/coho905/tse" target='_blank' class="project-title">Tiny Search Engine</a>
+            <p class="project-description">Early Google-style search engine for crawling, indexing, and ranking.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">C</span>
+            <span class="tech-tag">Algorithms</span>
+            <span class="tech-tag">Search</span>
+            </div>
+            </div>
+
+            <div class="project-card">
+            <div>
+            <a href="https://github.com/coho905/rwc" target='_blank' class="project-title">rwc</a>
+            <p class="project-description">Rust implementation of the wc bash command.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">Rust</span>
+            <span class="tech-tag">CLI</span>
+            <span class="tech-tag">Systems</span>
+            </div>
+            </div>
+
+            <div class="project-card">
+            <div>
+            <a href="https://github.com/coho905/Posify" target='_blank' class="project-title">Posify</a>
+            <p class="project-description">NLP tool for tagging parts of speech in sentences.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">NLP</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Linguistics</span>
+            </div>
+            </div>
+
+            <div class="project-card">
+            <div>
+            <a href="https://github.com/coho905/FileCompressor" target='_blank' class="project-title">File Compressor</a>
+            <p class="project-description">Zero-loss file compression and decompression with Huffman encoding.</p>
+            </div>
+            <div class="tech-tags">
+            <span class="tech-tag">Algorithms</span>
+            <span class="tech-tag">Data Structures</span>
+            <span class="tech-tag">Compression</span>
+            </div>
+            </div>
+            </div>
+            </div>
+            </section>
+
+            <script>
+            // Rotating quotes
+            const quotes = document.querySelectorAll(".quote-container span");
+            let currentQuoteIndex = 0;
+
+            function cycleQuotes() {
+            quotes[currentQuoteIndex].classList.remove("active");
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+            quotes[currentQuoteIndex].classList.add("active");
+            }
+
+            setInterval(cycleQuotes, 5000);
+
+            // Interactive 3D background with THREE.js
+              // Replace the existing THREE.js script with this toned-down version
+              // Moderately enhanced THREE.js script
+              (function() {
+                // Set up the scene
+                const canvas = document.getElementById('bg-canvas');
+                const renderer = new THREE.WebGLRenderer({
+                  canvas: canvas,
+                  antialias: true,
+                  alpha: true
+                });
+
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 45; // Slightly closer than the toned-down version
+
+                // Create a grid of points - MODERATE COUNT
+                const geometry = new THREE.BufferGeometry();
+                const count = 1000; // Increased from 800 but still less than original 1500
+                const positions = new Float32Array(count * 3);
+                const colors = new Float32Array(count * 3);
+
+                for (let i = 0; i < count; i++) {
+                  // Position - balanced spread
+                  positions[i * 3] = (Math.random() - 0.5) * 110;
+                  positions[i * 3 + 1] = (Math.random() - 0.5) * 110;
+                  positions[i * 3 + 2] = (Math.random() - 0.5) * 110;
+
+                  // Color - moderately vibrant
+                  colors[i * 3] = 0.8 + Math.random() * 0.2; // R (high)
+                  colors[i * 3 + 1] = 0.5 + Math.random() * 0.25; // G (medium)
+                  colors[i * 3 + 2] = 0.5 + Math.random() * 0.25; // B (medium)
+                }
+
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+                // Create material - moderate size and transparency
+                const material = new THREE.PointsMaterial({
+                  size: 0.18, // Slightly larger than toned-down
+                  vertexColors: true,
+                  transparent: true,
+                  opacity: 0.5, // More visible than toned-down
+                  sizeAttenuation: true
+                });
+
+                // Create points
+                const points = new THREE.Points(geometry, material);
+                scene.add(points);
+
+                // Add subtle ambient light
+                const ambientLight = new THREE.AmbientLight(0xFFB4A2, 0.4); // Moderate intensity
+                scene.add(ambientLight);
+
+                // Mouse interaction - MODERATE SENSITIVITY
+                let mouseX = 0;
+                let mouseY = 0;
+                let targetX = 0;
+                let targetY = 0;
+
+                const windowHalfX = window.innerWidth / 2;
+                const windowHalfY = window.innerHeight / 2;
+
+                document.addEventListener('mousemove', (event) => {
+                  mouseX = (event.clientX - windowHalfX) / 150; // Moderate sensitivity
+                  mouseY = (event.clientY - windowHalfY) / 150; // Moderate sensitivity
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                  camera.aspect = window.innerWidth / window.innerHeight;
+                  camera.updateProjectionMatrix();
+                  renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+
+                // Animation loop - MODERATE MOVEMENTS
+                function animate() {
+                  requestAnimationFrame(animate);
+
+                  targetX = mouseX * 0.15; // Moderate movement
+                  targetY = mouseY * 0.15; // Moderate movement
+
+                  points.rotation.y += 0.001; // Moderate rotation
+                  points.rotation.x += 0.0005; // Moderate rotation
+
+                  // Moderate camera movement
+                  camera.position.x += (targetX - camera.position.x) * 0.03;
+                  camera.position.y += (-targetY - camera.position.y) * 0.03;
+                  camera.lookAt(scene.position);
+
+                  // Animate points - MODERATE ANIMATION
+                  const positions = points.geometry.attributes.position.array;
+
+                  for (let i = 0; i < count; i++) {
+                    // Animate every 3rd point for moderate movement
+                    if (i % 3 === 0) {
+                      const ix = i * 3;
+                      const iy = i * 3 + 1;
+
+                      // Moderate amplitude of movement
+                      positions[iy] += Math.sin(Date.now() * 0.0003 + i * 0.1) * 0.008;
+                      positions[ix] += Math.cos(Date.now() * 0.0003 + i * 0.1) * 0.008;
+                    }
+                  }
+
+                  points.geometry.attributes.position.needsUpdate = true;
+
+                  renderer.render(scene, camera);
+                }
+
+                animate();
+              })();
+
+            // Add hover effects to project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+            // Randomly select cards to create a ripple effect
+            const allCards = document.querySelectorAll('.project-card');
+            const delay = 100;
+
+            allCards.forEach((otherCard, index) => {
+            if (otherCard !== card) {
+            // Calculate distance from current card to create ripple
+            setTimeout(() => {
+              otherCard.style.transform = 'scale(0.98)';
+              setTimeout(() => {
+                otherCard.style.transform = '';
+              }, 300);
+            }, delay * Math.random() * 5);
+            }
+            });
+            });
+            });
+            </script>
+            </body>
+            </html>
