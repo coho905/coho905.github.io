@@ -1,532 +1,442 @@
-   <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <title>colin wolfe</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-        <link rel="icon" type="image/png" href="/assets/favicon.png">
-        <link rel="icon" type="image/png" href="/assets/favicon.png">
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-        <style>
-          /* General Styling */
-          body {
-            font-family: "IBM Plex Sans", sans-serif;
-            font-weight: 400;
-            margin: 0;
-            overflow-x: hidden;
-            background-color: #121212;
-          }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>colin wolfe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* General Styling */
+      body {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-weight: 400;
+        margin: 0;
+        overflow: hidden; /* Prevent scrolling */
+        background-color: #121212;
+        height: 100vh;
+        position: relative;
+      }
 
-          /* Navbar */
-          .navbar {
-            background-color: #1E1E1E;
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 10;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-          }
+      /* Navbar */
+      .navbar {
+        background-color: #1E1E1E !important; /* Force background color for iPhone */
+        padding: 1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        -webkit-appearance: none; /* Fix for iOS */
+      }
 
+      .navbar-menu {
+        background-color: #1E1E1E !important; /* Force background color for iPhone */
+        -webkit-appearance: none; /* Fix for iOS */
+      }
 
+      .navbar-item {
+        color: #F2F2F2 !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        padding: 0.5rem 0.75rem;
+      }
 
-          .navbar-item {
-            color: #F2F2F2 !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-          }
+      .navbar-item:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: #FFB4A2;
+        transition: all 0.3s ease;
+      }
 
-          .navbar-item:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: #FFB4A2;
-            transition: all 0.3s ease;
-          }
+      .navbar-item:hover:after {
+        width: 100%;
+        left: 0;
+      }
 
-          .navbar-item:hover:after {
-            width: 100%;
-            left: 0;
-          }
+      .navbar-item:hover {
+        color: #FFB4A2 !important;
+        transform: translateY(-2px);
+      }
 
-          .navbar-item:hover {
-            color: #FFB4A2 !important;
-            transform: translateY(-2px);
-          }
+      /* Mobile navbar fix */
+      @media screen and (max-width: 768px) {
+        .navbar-start {
+          display: flex;
+          justify-content: space-around;
+          width: 100%;
+          background-color: #1E1E1E !important; /* Force background color for iPhone */
+        }
+        
+        .navbar-item {
+          padding: 0.5rem;
+          font-size: 0.9rem;
+        }
+      }
 
-          /* Hero Section */
-          .hero-section {
-            height: 100vh;
-            color: #F2F2F2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
-          }
+      /* Hero Section */
+      .hero-section {
+        height: 100vh;
+        color: #F2F2F2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+        padding: 0 20px;
+      }
 
-          .profile-photo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #FFB4A2;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            animation: fadeIn 1s ease-out forwards;
-          }
+      .profile-photo {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #FFB4A2;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+        animation: fadeIn 1s ease-out forwards;
+      }
 
-          .profile-photo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 180, 162, 0.4);
-          }
+      .profile-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(255, 180, 162, 0.4);
+      }
 
+      .hero-content {
+        z-index: 1;
+        margin-bottom: 60px; /* Make space for footer */
+      }
 
-          .hero-content strong {
-            color: #FFB4A2;
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-          }
+      .hero-content strong {
+        color: #FFB4A2;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        display: block;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
 
-          .hero-content p {
-            font-size: 1.2rem;
-            max-width: 500px;
-            line-height: 1.8;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 0.5s forwards;
-          }
+      .hero-content p {
+        font-size: 1.2rem;
+        max-width: 500px;
+        line-height: 1.8;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 0.5s forwards;
+      }
 
-          .hero-content a {
-            position: relative;
-            transition: all 0.3s ease;
-          }
+      .hero-content a {
+        position: relative;
+        transition: all 0.3s ease;
+      }
 
-          .hero-content a:hover {
-            transform: translateY(-2px);
-          }
+      .hero-content a:hover {
+        transform: translateY(-2px);
+      }
 
-          .scroll-icon {
-            position: absolute;
-            bottom: 70px;
-            font-size: 1.8rem;
-            color: #FFB4A2;
-            cursor: pointer;
-            animation: bounce 2s infinite ease-in-out;
-            transition: transform 0.3s ease, color 0.3s ease;
-          }
+      .scroll-icon {
+        position: absolute;
+        bottom: 70px;
+        font-size: 1.8rem;
+        color: #FFB4A2;
+        cursor: pointer;
+        animation: bounce 2s infinite ease-in-out;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
 
-          .scroll-icon:hover {
-            color: white;
-            transform: scale(1.2);
-          }
+      .scroll-icon:hover {
+        color: white;
+        transform: scale(1.2);
+      }
 
-          @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(15px); }
-            60% { transform: translateY(7px); }
-          }
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(15px); }
+        60% { transform: translateY(7px); }
+      }
 
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
 
-          @keyframes slideUp {
-            from { 
-              opacity: 0;
-              transform: translateY(30px);
+      @keyframes slideUp {
+        from { 
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Particle background effect */
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+
+      /* Footer */
+      .footer {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        background-color: #1E1E1E;
+        color: #F2F2F2;
+        position: fixed;
+        bottom: 0;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 5;
+      }
+
+      .footer a {
+        color: #FFB4A2;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .footer a:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -2px;
+        left: 50%;
+        background-color: #FFB4A2;
+        transition: all 0.3s ease;
+      }
+
+      .footer a:hover:after {
+        width: 100%;
+        left: 0;
+      }
+
+      .footer a:hover {
+        color: white;
+      }
+
+      /* Responsive fixes for mobile */
+      @media screen and (max-width: 768px) {
+        .hero-content strong {
+          font-size: 2rem;
+        }
+        
+        .hero-content p {
+          font-size: 1rem;
+          padding: 0 10px;
+        }
+        
+        .footer p {
+          font-size: 0.9rem;
+          padding: 0 10px;
+        }
+      }
+
+      /* 🔥 Glitch Hover Effect */
+      .glitch-hover {
+          display: inline-block;
+          font-size: 2.5rem;
+          position: relative;
+          transition: transform 0.9s ease-out;
+      }
+
+      .glitch-hover:hover {
+          animation: glitch 0.9s infinite alternate;
+          transform: scale(1.05);
+      }
+
+      @keyframes glitch {
+          0% { text-shadow: 2px 2px #ff0000; }
+          50% { text-shadow: -2px -2px #00ff00; }
+          100% { text-shadow: 2px 2px #ff0000; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-menu is-active">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/">home</a>
+          <a class="navbar-item" target="_blank" href="/websiteresume.pdf">resume</a>
+          <a class="navbar-item" href="/Projects/index.html">projects</a>
+          <a class="navbar-item" href="/Blog/writing.html">writing</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div id="particles-js"></div>
+      <img src="/2EF852A7-15D9-43BC-9DF9-1402D0D5DD6A.jpg" alt="Colin Wolfe" class="profile-photo">
+      <div class="hero-content">
+        <strong>Colin Wolfe</strong>
+        <p>
+          I study computer science and mathematics at <a style="color:#FFB4A2;" href="https://dartmouth.edu" target="_blank">Dartmouth</a>.  
+          Previously interned at <a href="https://probity.com" style="color:#FFB4A2;" target="_blank">Probity Inc.</a> and the <a href="https://www.jlab.org" style="color:#FFB4A2;" target="_blank">Jefferson Lab</a>. Currently working at <a href="https://dali.dartmouth.edu" style="color:#FFB4A2;" target="_blank">DALI Lab</a>, <a href="https://versara.ai" style="color:#FFB4A2;" target="_blank">Versara.ai</a>,  
+          and <a href="https://engineering.dartmouth.edu/community/faculty/eugene-santos-jr" style="color:#FFB4A2;" target="_blank">DI2AG Lab</a>. <br>I'm interested in AI systems and how they work. 
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p><a>colin wolfe</a><a> </a> • <a href="mailto:colin.h.wolfe.27@dartmouth.edu">colin.h.wolfe.27@dartmouth.edu</a></p>
+    </footer>
+
+    <!-- Particle.js for background effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+      // Particle.js configuration for hero section
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 80,
+            "density": {
+              "enable": true,
+              "value_area": 800
             }
-            to {
-              opacity: 1;
-              transform: translateY(0);
+          },
+          "color": {
+            "value": "#ffffff"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+          },
+          "opacity": {
+            "value": 0.2,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+            "anim": {
+              "enable": false,
+              "speed": 40,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#ffffff",
+            "opacity": 0.1,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 2,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+              "enable": false,
+              "rotateX": 600,
+              "rotateY": 1200
             }
           }
-                    /* Second Section - Enhanced animations */
-          /*
-          .second-section {
-            min-height: 100vh;
-            background-color: #F8F9FA;
-            color: #121212;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding: 70px 20px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.8s ease, transform 1.8s ease;
-            background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
-          }
-
-          .second-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-
-          .second-section h2 {
-            font-size: 2.8rem;
-            color: #1E1E1E;
-            margin-bottom: 25px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
-          }
-
-          .second-section h2:after {
-            content: '';
-            position: absolute;
-            width: 40%;
-            height: 3px;
-            background-color: #FFB4A2;
-            bottom: -10px;
-            left: 30%;
-            transform: scaleX(0);
-            transition: transform 1s ease;
-          }
-
-          .second-section.visible h2:after {
-            transform: scaleX(1);
-          }
-
-          .quote {
-            font-size: 1.5rem;
-            font-style: italic;
-            color: #555;
-            max-width: 700px;
-            margin: 30px 0;
-            line-height: 1.6;
-            position: relative;
-            padding: 0 30px;
-          }
-
-          .quote:before, .quote:after {
-            content: '"';
-            font-size: 3rem;
-            color: #FFB4A2;
-            opacity: 0.5;
-            position: absolute;
-          }
-
-          .quote:before {
-            top: -20px;
-            left: 0;
-          }
-
-          .quote:after {
-            bottom: -40px;
-            right: 0;
-          }
-*/
-          /* Enhanced Flipping Text with more vertical space */
-          .flipping-text-container {
-            display: inline-block;
-            height: 3.5rem; /* Increased height for better spacing */
-            overflow: hidden;
-            position: relative;
-            width: 320px;
-            margin-top: 50px;
-            perspective: 1000px;
-          }
-
-          .flipping-text span {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 600;
-            text-align: center;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(40px) rotateX(40deg); /* Added 3D rotation */
-            transform-origin: center center;
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-            padding: 5px 0;
-          }
-
-          /* Individual color styling with enhanced effects */
-          .flipping-text span:nth-child(1) {
-            color: #4285F4; /* Google Blue for AI & ML */
-            text-shadow: 0 0 5px rgba(66, 133, 244, 0.3);
-          }
-
-          .flipping-text span:nth-child(2) {
-            color: #34A853; /* Green for Cybersecurity */
-            text-shadow: 0 0 5px rgba(52, 168, 83, 0.3);
-          }
-
-          .flipping-text span:nth-child(3) {
-            color: #EA4335; /* Red for Startups & Innovation */
-            text-shadow: 0 0 5px rgba(234, 67, 53, 0.3);
-          }
-
-          .flipping-text span:nth-child(4) {
-            color: #FBBC05; /* Yellow for Mathematics & Logic */
-            text-shadow: 0 0 5px rgba(251, 188, 5, 0.3);
-          }
-
-          .flipping-text span.active {
-            opacity: 1;
-            transform: translateY(0) rotateX(0deg);
-          }
-
-          .flipping-text span.exit {
-            opacity: 0;
-            transform: translateY(-40px) rotateX(-40deg);
-          }
-
-          /* Particle background effect */
-          #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-          }
-
-          /* Footer */
-          .footer {
-            width: 100%;
-            text-align: center;
-            padding: 20px 0;
-            background-color: #1E1E1E;
-            color: #F2F2F2;
-            position: absolute;
-            bottom: 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-          }
-
-          .footer a {
-            color: #FFB4A2;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-          }
-
-          .footer a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -2px;
-            left: 50%;
-            background-color: #FFB4A2;
-            transition: all 0.3s ease;
-          }
-
-          .footer a:hover:after {
-            width: 100%;
-            left: 0;
-          }
-
-          .footer a:hover {
-            color: white;
-          }
-
-
-
-          /* 🔥 Glitch Hover Effect */
-          .glitch-hover {
-              display: inline-block;
-              font-size: 2.5rem;
-              position: relative;
-              transition: transform 0.9s ease-out;
-          }
-
-          .glitch-hover:hover {
-              animation: glitch 0.9s infinite alternate;
-              transform: scale(1.05);
-          }
-
-          @keyframes glitch {
-              0% { text-shadow: 2px 2px #ff0000; }
-              50% { text-shadow: -2px -2px #00ff00; }
-              100% { text-shadow: 2px 2px #ff0000; }
-          }
-
-
-        </style>
-      </head>
-      <body>
-        <!-- Navbar -->
-        <nav class="navbar">
-          <div class="navbar-menu">
-            <div class="navbar-start">
-              <a class="navbar-item" href="/">home</a> <a class="navbar-item" target="_blank" href="/websiteresume.pdf">resume</a> <a class="navbar-item" href="/Projects/index.html">projects</a> <a class="navbar-item" href="/Blog/writing.html">writing</a>
-            </div>
-          </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <section class="hero-section" style="overflow: hidden;" id="hero">
-          <div id="particles-js"></div>
-          <img src="/2EF852A7-15D9-43BC-9DF9-1402D0D5DD6A.jpg" alt="Colin Wolfe" class="profile-photo">
-          <div class="hero-content">
-            <strong>Colin Wolfe</strong>
-            <p>
-              I study computer science and mathematics at <a style="color:#FFB4A2;" href="https://dartmouth.edu" target="_blank">Dartmouth</a>.  
-              Previously interned at <a href="https://probity.com" style="color:#FFB4A2;" target="_blank">Probity Inc.</a> and the <a href="https://www.jlab.org" style="color:#FFB4A2;" target="_blank">Jefferson Lab</a>. Currently working at <a href="https://dali.dartmouth.edu" style="color:#FFB4A2;" target="_blank">DALI Lab</a>, <a href="https://versara.ai" style="color:#FFB4A2;" target="_blank">Versara.ai</a>,  
-              and <a href="https://engineering.dartmouth.edu/community/faculty/eugene-santos-jr" style="color:#FFB4A2;" target="_blank">DI2AG Lab</a>. <br>I'm interested in AI systems and how they work. 
-            </p>
-          </div>
-        <!-- Second Section -->
-          </section>
-
-          <!-- Footer -->
-          <footer class="footer" style="overflow: hidden;">
-            <p><a>colin wolfe</a><a> </a> • <a href="mailto:colin.h.wolfe.27@dartmouth.edu">colin.h.wolfe.27@dartmouth.edu</a></p>
-          </footer>
-
-        <!-- Particle.js for background effects -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-
-        <script>
-          // Particle.js configuration for hero section
-          particlesJS('particles-js', {
-            "particles": {
-              "number": {
-                "value": 80,
-                "density": {
-                  "enable": true,
-                  "value_area": 800
-                }
-              },
-              "color": {
-                "value": "#ffffff"
-              },
-              "shape": {
-                "type": "circle",
-                "stroke": {
-                  "width": 0,
-                  "color": "#000000"
-                },
-              },
-              "opacity": {
-                "value": 0.2,
-                "random": true,
-                "anim": {
-                  "enable": true,
-                  "speed": 1,
-                  "opacity_min": 0.1,
-                  "sync": false
-                }
-              },
-              "size": {
-                "value": 3,
-                "random": true,
-                "anim": {
-                  "enable": false,
-                  "speed": 40,
-                  "size_min": 0.1,
-                  "sync": false
-                }
-              },
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "grab"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
               "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.1,
-                "width": 1
-              },
-              "move": {
-                "enable": true,
-                "speed": 2,
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out",
-                "bounce": false,
-                "attract": {
-                  "enable": false,
-                  "rotateX": 600,
-                  "rotateY": 1200
-                }
+                "opacity": 0.4
               }
             },
-            "interactivity": {
-              "detect_on": "canvas",
-              "events": {
-                "onhover": {
-                  "enable": true,
-                  "mode": "grab"
-                },
-                "onclick": {
-                  "enable": true,
-                  "mode": "push"
-                },
-                "resize": true
-              },
-              "modes": {
-                "grab": {
-                  "distance": 140,
-                  "line_linked": {
-                    "opacity": 0.4
-                  }
-                },
-                "push": {
-                  "particles_nb": 4
-                }
-              }
-            },
-            "retina_detect": true
-          });
-
-          // Get all the text elements
-          const words = document.querySelectorAll(".flipping-text span");
-          let currentIndex = 0;
-          let prevIndex = -1;
-
-          // Initialize - make sure no word has the active class initially
-          words.forEach(word => word.classList.remove("active"));
-
-          // Enhanced function to cycle through words with better transitions
-          function cycleWords() {
-            // Store previous word index
-            prevIndex = currentIndex;
-
-            // Move to next word
-            currentIndex = (currentIndex + 1) % words.length;
-
-            // Add exit class to previous word if it exists
-            if (prevIndex >= 0) {
-              words[prevIndex].classList.remove("active");
-              words[prevIndex].classList.add("exit");
-
-              // Remove exit class after animation completes
-              setTimeout(() => {
-                words[prevIndex].classList.remove("exit");
-              }, 1000);
+            "push": {
+              "particles_nb": 4
             }
+          }
+        },
+        "retina_detect": true
+      });
 
-            // Add active class to current word
-            words[currentIndex].classList.add("active");
+      // Get all the text elements
+      const words = document.querySelectorAll(".flipping-text span");
+      let currentIndex = 0;
+      let prevIndex = -1;
+
+      // Initialize - make sure no word has the active class initially
+      if (words.length > 0) {
+        words.forEach(word => word.classList.remove("active"));
+        
+        // Enhanced function to cycle through words with better transitions
+        function cycleWords() {
+          // Store previous word index
+          prevIndex = currentIndex;
+
+          // Move to next word
+          currentIndex = (currentIndex + 1) % words.length;
+
+          // Add exit class to previous word if it exists
+          if (prevIndex >= 0) {
+            words[prevIndex].classList.remove("active");
+            words[prevIndex].classList.add("exit");
+
+            // Remove exit class after animation completes
+            setTimeout(() => {
+              words[prevIndex].classList.remove("exit");
+            }, 1000);
           }
 
-          // Run immediately on page load
-          cycleWords();
+          // Add active class to current word
+          words[currentIndex].classList.add("active");
+        }
 
-          // Then set interval for future changes - 4 seconds (4000ms)
-          setInterval(cycleWords, 4000);
+        // Run immediately on page load
+        cycleWords();
 
-          // Smooth scroll for the arrow with enhanced behavior
-
-          // Add scroll-based fade-in effect with improved detectio        
-        </script>
-      </body>
-    </html>
+        // Then set interval for future changes - 4 seconds (4000ms)
+        setInterval(cycleWords, 4000);
+      }
+      document.addEventListener('touchmove', function(event) {
+          event.preventDefault();
+      }, { passive: false });
+    </script>
+  </body>
+</html>
