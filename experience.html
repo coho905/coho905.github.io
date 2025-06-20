@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>colin wolfe's experience</title>
+
+  <style>
+    :root {
+      --bg-dark: #0c0c0c;
+      --fg-light: #f5f5f5;
+      --fg-muted: #b3b3b3;
+      --accent:  #66b3ff;
+      --transition: 0.8s cubic-bezier(.25,.6,.3,1);
+      
+      --color-1: #242447;
+      --color-2: #b6b6b6;
+      --color-3: #2F3C7E;
+      --color-4: #94b5c2;
+      --color-5: #4a1f64;
+      --color-6: #000000;
+      --color-7: #014c2d;
+      --color-8: #430a0a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--fg-light);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--fg-muted);
+      margin-bottom: 2rem;
+    }
+
+    .header-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--fg-muted);
+      font-size: 0.9rem;
+      opacity: 0.8;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    .exp-entry {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 2rem;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all var(--transition);
+    }
+
+    .exp-entry-inner {
+      max-width: 55%;
+      margin: 0 auto;
+      transform: translateY(40px);
+      transition: transform var(--transition);
+    }
+
+    .exp-entry.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .exp-entry.visible .exp-entry-inner {
+      transform: translateY(0);
+    }
+
+    .exp-entry:nth-child(1) { background: var(--color-1); }
+    .exp-entry:nth-child(2) { background: var(--color-3); }
+    .exp-entry:nth-child(3) { background: var(--color-2); }
+    .exp-entry:nth-child(4) { background: var(--color-4); }
+    .exp-entry:nth-child(5) { background: var(--color-5); }
+    .exp-entry:nth-child(6) { background: var(--color-6); }
+    .exp-entry:nth-child(7) { background: var(--color-7); }
+    .exp-entry:nth-child(8) { background: var(--color-1); }
+    .exp-entry:nth-child(9) { background: var(--color-2); }
+    .exp-entry:nth-child(10) { background: var(--color-3); }
+
+    .exp-entry h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .role {
+      font-size: 0.95rem;
+      color: var(--fg-muted);
+      margin-bottom: 1rem;
+    }
+
+    .desc {
+      font-size: 1.05rem;
+      color: var(--fg-light);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+    .graphmind {
+        text-decoration: none;
+        font-weight: 800;
+    }
+    .graphmind:hover {
+        text-decoration: none;
+    }
+    
+    .exp-entry-inner h2 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: .25rem;
+    }
+
+    .exp-entry-inner p {
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+    }
+    .exp-entry-inner li {
+        font-size: 1.25rem;
+        font-weight: 400;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .fixed-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .fixed-button {
+      padding: 10px 25px;
+      background: var(--bg-dark);
+      color: var(--fg-light);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    .fixed-button:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+        .exp-entry-inner {
+            max-width: 100%;
+            align-items: left;
+            justify-content: left;
+            text-align: left;
+        }
+    }
+    @media (max-width: 800px) {
+        #optional {
+            display: none;
+        }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="header-section">
+    <h1>Experience</h1>
+    <p class="subtitle">Research, engineering, and building.</p>
+    <div class="scroll-indicator">↓ Scroll to explore</div>
+  </section>
+
+
+  <article class="exp-entry">
+    <div class="exp-entry-inner">
+      <h2><a style="color:#cfb6b8;" href="http://di2ag.thayer.dartmouth.edu/main/Distributed_Information_and_Intelligence_Analysis_Group:About" class="graphmind">Distributed Intelligence Lab</a></h2>
+      <p class="role" style="color: rgb(191, 190, 190);">Researcher • Present</p>
+      <p class="desc" style="color: rgb(227, 226, 226);">
+        Investigating emergent behaviors in large language models and training paradigms to accelerate reasoning. Designing experiments on curriculum learning and phase transitions in LLM development. Also exploring the cross-modality of symbolic reasoning within large vision-language models. Presented poster at Technigala Symposium on a novel robustness paradigm for worst-class accuracy in vision models.
+      </p>
+    </div>
+  </article>
+
+  <article class="exp-entry">
+    <div class="exp-entry-inner">
+      <h2 style="color: rgb(0, 0, 0);"><a style="color: rgb(72, 5, 58);" href="https://sites.google.com/umich.edu/yujunyan/experience" class="graphmind">Graphmind Lab</a></h2>
+      <p style="color: rgb(52, 51, 51);"class="role">Research Intern • Present</p>
+      <p style="color: black;" class="desc">
+        Interpreting graph neural networks and multi-agent debate frameworks. Co-authoring a paper on question-answer and single-agent winning prediction using node embeddings and signed convolutional graph networks. Currently beating benchmarks by 7% on question-answer and >20% on single-agent winning prediction.
+      </p>
+    </div>
+  </article>
+
+  <article class="exp-entry">
+    <div class="exp-entry-inner">
+      <h2><a style="color: #1a4977" href="https://dali.dartmouth.edu/" class="graphmind">DALI Lab</a></h2>
+      <p class="role" style="color: rgb(52, 51, 51);">Machine Learning Engineer • Present</p>
+      <p class="desc" style="color: black;">
+        Deployed full-stack ML applications with real-time inference for a myriad of contractors. Built a barnacle counting system for the National Park Service using SOTA object detection models. Built a RAG system for enhanced context extraction at a YC-backed code review startup (Benchify). Deployed a CNN for plastic classification for the Dartmouth Chemistry Department, which worked with excruciatingly poor data quality. For fun, I run the lab's hiring process - managing 30+ interviews and 150+ applications.
+      </p>
+    </div>
+  </article>
+
+  <article class="exp-entry">
+    <div class="exp-entry-inner">
+      <h2><a style="color: rgb(255, 253, 253);" href="https://www.probity.com/" class="graphmind">Probity Inc.</a></h2>
+      <p class="role" style="color: rgb(175, 175, 175);">Engineering Intern • 2024</p>
+      <p class="desc" style="color: rgb(255, 255, 255);">
+        Prototyped human-in-the-loop ML paradigm for spoken language verification with 200x better accuracy than traditional training, using orders of magnitude less data in training. Collected a large corpus of data on 12 South Asian languages. Configured 8 Intel NUC servers and optimized 2 ML algorithms for CPU performance.
+      </p>
+    </div>
+  </article>
+
+  <article class="exp-entry">
+    <div class="exp-entry-inner">
+      <h2><a style="color: rgb(215, 22, 22);" href="https://www.jlab.org/" class="graphmind">Jefferson Lab</a></h2>
+      <p class="role">Engineering Intern • 2022</p>
+      <p class="desc">
+        Constructed AI surrogate models of scientific code for the Parallel Hardware viA Surrogate Models project. Architected physics-informed neural networks achieving MSE <.001 for approximating differential equation solutions. Wrote bash scripts to reduce and automate installation steps across various operating systems. Rapidly self-taught differential equations and PyTorch for deployment.
+      </p>
+    </div>
+  </article>
+
+  <article class="exp-entry">
+    <div class="exp-entry-inner">
+      <h2>Courses</h2>
+      <p class="role">Astericks denote graduate level courses.</p>
+        <h3>Technical</h3>
+        <p>
+          Object-Oriented Programming and Data Structures&nbsp;&nbsp;•&nbsp;&nbsp;
+          Discrete Mathematics&nbsp;&nbsp;•&nbsp;&nbsp;
+          Algorithms&nbsp;&nbsp;•&nbsp;&nbsp;
+          Software Design and Implementation&nbsp;&nbsp;•&nbsp;&nbsp;
+          Full Stack Web Development&nbsp;&nbsp;•&nbsp;&nbsp;
+          Security and Privacy *&nbsp;&nbsp;•&nbsp;&nbsp;
+          Digital Electronics&nbsp;&nbsp;•&nbsp;&nbsp;
+          Machine Learning *&nbsp;&nbsp;•&nbsp;&nbsp;
+          Deep Learning *&nbsp;&nbsp;•&nbsp;&nbsp;
+          Deep Learning Seminar on Robustness and Generalization *&nbsp;&nbsp;•&nbsp;&nbsp;
+          Vector Calculus&nbsp;&nbsp;•&nbsp;&nbsp;
+          Honors Linear Algebra&nbsp;&nbsp;•&nbsp;&nbsp;
+          Number Theory&nbsp;&nbsp;•&nbsp;&nbsp;
+          Discrete and Probabilistic Systems
+        </p>
+        <br>
+        <div id="optional">
+            <h3>Humanities</h3>
+            <p>
+              Ordinary Language Philosophy&nbsp;&nbsp;•&nbsp;&nbsp;
+              Philosophy and Computers&nbsp;&nbsp;•&nbsp;&nbsp;
+              The Global Thirties: Economics and Politics&nbsp;&nbsp;•&nbsp;&nbsp;
+              Introductory Economics&nbsp;&nbsp;•&nbsp;&nbsp;
+              Public Policy&nbsp;&nbsp;•&nbsp;&nbsp;
+              Writing Seminar (The Art of Human Dialogue)&nbsp;&nbsp;•&nbsp;&nbsp;
+              Expository Writing (Ownership of Ideas)
+            </p>
+        </div>
+     </div>
+  </article>
+
+  <article class="exp-entry">
+    <div class="exp-entry-inner">
+      <h2>Awards</h2>
+      <p class="role">Awards, honors, grants, etc.</p>
+      <p>
+        <a href="https://web.cs.dartmouth.edu/undergraduate/prizes-funding-opportunities/lovelace-research-program">Lovelace Scholar</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://neukom.dartmouth.edu/funding/students/neukom-scholars-program">Neukom Scholar</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://web.cs.dartmouth.edu/undergraduate/prizes-funding-opportunities/kemeny-prize">Kemeny Prize 2025</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://students.dartmouth.edu/ugar/research/programs/presidential-scholars">Presidential Scholar</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://magnuson.dartmouth.edu/news/fall-24-founder-grants-awarded-to-seven-startups">Founder's Grant</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://versara.ai/">MIT Sandbox Grant</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://fredericksburg.com/news/community/article_8d70b3de-2b18-11ee-b976-4fbcd7e9dbca.html">Dunkin Donuts DMV Scholar</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://www.youtube.com/watch?v=SpzboAg8sHU">Riverbend High School Valedictorian</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://www.spotsylvania.k12.va.us/o/riverbend/article/824539">National Rural Scholar</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+        <a href="https://www.thedartmouth.com/staff/colin-wolfe">Newspaper Writings</a>
+      </p>
+     </div>
+  </article>
+
+  <article class="exp-entry" style="display: none;">
+    <div class="exp-entry-inner">
+      <h2>Skills</h2>
+      <p class="desc">
+        <div style="display: flex; gap: 1rem;">
+            <div>
+                <h3>Programming</h3>
+                <p>Python, PyTorch, TensorFlow, NumPy, Pandas, Scikit-Learn, OpenCV, PyTorch Geometric, PyTorch Lightning, PyTorch Lightning Geometric, PyTorch Geometric DataLoader, PyTorch Geometric DataLoader2D, PyTorch Geometric DataLoader3D, PyTorch Geometric DataLoader4D, PyTorch Geometric DataLoader5D, PyTorch Geometric DataLoader6D, PyTorch Geometric DataLoader7D, PyTorch Geometric DataLoader8D, PyTorch Geometric DataLoader9D, PyTorch Geometric DataLoader10D</p>
+            </div>
+            <div>
+                <h3>Languages</h3>
+                <p> English, Spanish, Mandarin</p>
+            </div>
+        </div>
+      </p>
+    </div>
+  </article>
+
+  <div class="fixed-buttons">
+    <a href="./index.html" class="fixed-button">home</a>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.exp-entry').forEach(entry => observer.observe(entry));
+  </script>
+</body>
+</html>
