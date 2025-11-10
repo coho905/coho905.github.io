@@ -119,6 +119,19 @@
       font-size: 1rem;
       color: var(--fg-muted);
     }
+
+    /* Make the “drive” link look exactly like normal text */
+    .invisible-link {
+      color: inherit;
+      text-decoration: none;
+      font-weight: inherit;
+      cursor: pointer;
+    }
+    .invisible-link:hover,
+    .invisible-link:focus {
+      color: inherit;
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -137,7 +150,7 @@
   </p>
 
   <p>
-    At Dartmouth, I'm a teaching assistant for the computer science department, a brother of the Phi Delta Alpha fraternity, an algorithms tutor, have written for the student newspaper, hosted a radio show on WebDCR, and slept on the green more than once. I like to hike and drive in the Upper Valley as much as possible.
+    At Dartmouth, I'm a teaching assistant for the computer science department, a brother of the Phi Delta Alpha fraternity, an algorithms tutor, have written for the student newspaper, hosted a radio show on WebDCR, and slept on the green more than once. I like to hike and <a href="./xu.html" class="invisible-link">drive</a> in the Upper Valley as much as possible.
   </p>
 
   <h2>news, plans, and current events</h2>
