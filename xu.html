@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>100 reasons</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: "Raleway", sans-serif;
+        background-color: #fff5f8;
+        color: #6b2737;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      .hero {
+        background: linear-gradient(to right, #ff758c, #ff7eb3);
+        color: white;
+        padding: 80px 20px;
+      }
+
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3rem;
+        font-weight: 700;
+        text-transform: lowercase;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
+
+      .reason-container {
+        max-width: 800px;
+        margin: 50px auto;
+        text-align: left;
+        padding: 20px;
+      }
+
+      .reason {
+        background: white;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 1.2rem;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-in-out;
+        text-transform: lowercase;
+      }
+
+      .reason.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .footer {
+        background: #6b2737;
+        color: white;
+        padding: 20px;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <p>hi baby</p>
+    </section>
+
+    <div class="reason-container" id="reasons"></div>
+
+    <footer class="footer">
+      <p>i love you so much, steph</p>
+    </footer>
+
+    <script>
+      const reasons = [
+        "you always make me feel safe",
+        "you never let me feel alone",
+        "you make my heart feel full",
+        "you make everything softer",
+        "you always know what i need",
+        "you check on me even when i’m tired",
+        "you make bad days feel lighter",
+        "you actually care about my feelings",
+        "you make me feel lucky whenever we're together",
+        "you make ordinary things magical",
+        "you make me feel like a princess",
+        "holding your hand makes me giddy",
+        "you always make people feel seen",
+        "you remind me what really matters",
+        "you are my happiest place",
+        "you believe in me always",
+        "you give me unconditional love",
+        "you make love feel effortless",
+        "you make life feel so beautiful",
+        "you always call me your husband",
+        "you talk about marrying me one day",
+        "you are the kindest person i know",
+        "you love everything and everyone deeply",
+        "your empathy is incredible",
+        "you're so nice to the kids",
+        "such a good sense of fashion",
+        "likes helping me shop",
+        "my parents love you",
+        "i have more than 100 reasons",
+        "you feel comfortable farting around me",
+        "you're crazy over me",
+        "you always try to understand people",
+        "you always stand up for others",
+        "you are so incredibly smart",
+        "you actually listen when i rant",
+        "you never pretend to be someone else",
+        "you challenge me in the best ways",
+        "you bring out the best in people",
+        "you never make me feel less",
+        "you love with your whole heart",
+        "you always know when i need you",
+        "you are the most selfless person",
+        "you make life exciting just by existing",
+        "you always put others first",
+        "you have the purest heart",
+        "the kindest person i know",
+        "you always celebrate my wins",
+        "you are so emotionally intelligent",
+        "you make me laugh constantly",
+        "you sometimes forget the small details but get excited nonetheless",
+        "you always make me laugh",
+        "you have good music taste",
+        "you put up with my music taste",
+        "you send me tiktoks that remind you of me",
+        "you always let me take the aux",
+        "you always let me ramble about music",
+        "licking lemur",
+        "tickle monster",
+        "your back rubs",
+        "your hair rubs",
+        "your goofy smile",
+        "your laugh when we're tickling each other",
+        "you took my virginity",
+        "you love traveling with me",
+        "i love travelling with you",
+        "you always make road trips fun",
+        "you make exploring new places exciting",
+        "you pick out the best restaurants",
+        "you put everything on beli",
+        "you love forcing me to try new foods",
+        "you are my favorite travel buddy",
+        "you always want to see the world",
+        "you make even short trips feel special",
+        "you always look cute",
+        "you make long trips bearable",
+        "you always want to go on adventures",
+        "you take the best travel photos",
+        "you love walking around with me",
+        "you let me take lots of pee breaks",
+        "you always want to make new memories",
+        "you love experiencing new cultures with me",
+        "you're so motivated",
+        "you are always up for spontaneous plans",
+        "you make every place feel like home",
+        "you FaceTimed me every day over winterim",
+        "you put up with my driving",
+        "you smell amazing almost all the time",
+        "you look adorable when you're sleepy",
+        "you always know what to say",
+        "you let me often watch my movies",
+        "we watch shitty tv and movies together",
+        "you laugh at my dumbest jokes",
+        "you started threatening to kill people",
+        "you started threatening to blow things up",
+        "you put up with my weird habits",
+        "you are my favorite part of life",
+        "you bring warmth wherever you go",
+        "you always bring so much joy",
+        "you make me love loving you",
+        "you are perfect to me",
+        "i want to spend the rest of my life with you",
+        "you are everything i ever wanted"
+      ];
+
+      const reasonsContainer = document.getElementById("reasons");
+
+      reasons.forEach((reason, index) => {
+        const div = document.createElement("div");
+        div.classList.add("reason");
+        div.innerText = `${index + 1}. ${reason}`;
+        reasonsContainer.appendChild(div);
+      });
+
+      document.querySelectorAll(".reason").forEach((reason) => {
+        reason.classList.add("show");
+      });
+    </script>
+  </body>
+</html>
