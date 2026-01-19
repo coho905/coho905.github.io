@@ -1,126 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>colin wolfe</title>
-  <link rel="icon" type="image/x-icon" href="./favi.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>colin wolfe website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      --bg-dark: #0c0c0c;
-      --fg-light: #f5f5f5;
-      --fg-muted: #b3b3b3;
-      --accent:  #3db4cf;
-      --transition: 0.8s cubic-bezier(.25,.6,.3,1);
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
-      background: var(--bg-dark);
-      color: var(--fg-light);
-      overflow-x: hidden;
-    }
-    a      { color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
+        ::selection {
+            background: #874a50;
+            color: #f4f3ef;
+        }
 
-    .wrapper { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
-    .dartmouth {
-        color: #009356;
-    }
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      position: relative;
-      background: var(--bg-dark);
-    }
-    .profile-img {
-      flex-shrink: 0;
-      width: 200px; height: 200px;
-      border-radius: 12px;
-      object-fit: cover;
-      
-    }
-    .copy h1 {
-      margin: 0 0 1rem;
-      font-size: 2.5rem;
-      letter-spacing: .5px;
-    }
+        body {
+            font-family: 'EB Garamond', 'Noto Serif SC', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.75;
+            color: #2a2a2a;
+            background: #f4f3ef;
+            padding: 16vh 24px 14vh 24px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
 
-    .tagline { font-size: 1.1rem; color: var(--fg-muted); }
+        a {
+            color: inherit;
+            text-decoration-color: #874a50;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
 
-    .nomura {
-      color: #ca142a;
-    }
+        a:hover {
+            color: #874a50;
+        }
 
+        header {
+            margin-bottom: 1.5em;
+        }
 
-    .contact-links {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      display: flex;
-      gap: 1rem;
-      color: var(--fg-muted);
-      font-size: 0.9rem;
-    }
-    @media (min-width: 630px) {
-      #large_screen {display:block;}
-      #small_screen {display:none;}
-    }
-    @media (max-width: 630px) {
-      img {display: none;}
-      #large_screen {display:none;}
-      #small_screen {display:block;}
-      .hero { flex-direction: column; text-align: left; display: flex; align-items: flex-start; justify-content: center; }
-      .profile-img { width: 160px; height: 160px; }
-      .copy h1 { font-size: 2rem; }
-    }
-    .intelligent {
-      color: #204fd2;
-    }
-  </style>
+        h1 {
+            font-size: 1.3em;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        h1 span {
+            font-style: normal;
+            color: #888;
+        }
+
+        .photo-container {
+            margin: 1.5em 0 2em 0;
+        }
+
+        .photo {
+            width: 100%;
+            max-width: 280px;
+            filter: grayscale(20%);
+            background: #e0dfdc;
+        }
+
+        .photo:hover {
+            filter: grayscale(0%);
+        }
+
+        .photo-caption {
+            font-size: 0.85em;
+            font-style: italic;
+            color: #aaa;
+            margin-top: 0.4em;
+        }
+
+        .intro {
+            margin-bottom: 2.5em;
+        }
+
+        .intro p {
+            margin-bottom: 0.8em;
+        }
+
+        .dim {
+            color: #777;
+        }
+
+        .v-dim {
+            color: #999;
+        }
+
+        section {
+            margin-bottom: 2em;
+        }
+
+        .label {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 0.4em;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 0.35em;
+        }
+
+        hr {
+            border: none;
+            margin: 2.5em 0 1.8em 0;
+        }
+
+        hr::before {
+            content: '~';
+            color: #ccc;
+        }
+
+        footer {
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        footer a {
+            margin-right: 1.2em;
+        }
+
+        .seal {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.08;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12vh 20px 10vh 20px;
+            }
+            .photo {
+                max-width: 100%;
+            }
+            .seal {
+                display: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <main class="wrapper">
-    <section class="hero" id="home">
-      <img src="./IMG_0786.jpg" alt="Colin Wolfe" class="profile-img"><!--https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunqVvhYnE8je3RN7W5Klbifs9Kr_NnfFDpw&s-->
-      <div class="copy" id="large_screen">
-        <h1>Colin&nbsp;Wolfe</h1>
-        <p class="tagline">            
-          Dartmouth undergrad in computer science and electrical engineering.<br>
-          Incoming trading intern at Nomura.<br><br>
-          I explore intelligent systems that create, reason, perceive, and act.
-        </p>
-        <div style="display: flex; gap: 1rem;">
-          <p><a href="./experience.html">experience</a></p>
-          <p><a href="./about.html">about</a></p>
-        </div>
-      </div>
-      <div class="copy" id="small_screen">
-        <h1>Colin&nbsp;Wolfe</h1>
-        <p class="tagline">            
-          Dartmouth undergrad in cs & ee. <br>Incoming trading intern at Nomura.<br>
-          I build intelligent systems.
-        </p>
-        <div style="display: flex; gap: 1rem;">
-          <p><a href="./experience.html">experience</a></p>
-          <p><a href="./about.html">about</a></p>
-      </div>
-      </div>
-    </section>
-  </main>
 
-  <div class="contact-links">
-    <a href="mailto:wolfe.27@dartmouth.edu">wolfe.27@dartmouth.edu</a>
-    <a href="https://x.com/coliwolfe">X</a>
+<header>
+    <h1>colin wolfe</h1>
+</header>
+
+<div class="photo-container">
+    <img src="IMG_1575.jpg" alt="" class="photo">
+    <p class="photo-caption">tsim sha tsui, evening</p>
+</div>
+
+<div class="intro">
+    <p>Dartmouth College, computer & electrical engineering. Interested in physical and intelligent systems, modern philosophy, and writing.</p>
+    <p class="dim">Virginia, New Hampshire</p>
+</div>
+
+<section>
+    <p class="label">now</p>
+    <ul>
+        <li>learning Chinese <span class="v-dim">我的中文名字是柯林. 我们可以练习说中文吧。</span></li>
+        <li>working on microprocessors, embedded ai, and chip design</li>
+        <li>research on interpretability; learning honesty in large models</li>
+        <li>writing about intelligence versus computation, and the trust economy</li>
+
+    </ul>
+</section>
+
+<section>
+    <p class="label">previously</p>
+    <ul>
+        <li class="">studied at the Chinese University of Hong Kong (Fall 2025)</li>
+        <li class="">graph neural networks for multi-agent debate classification</li>
+        <li class="">FPGA production, morph programming language, and much more</li>
+    </ul>
+</section>
+
+<footer>
+    <p><b>contact</b></p>
+    <a href="mailto:colin.h.wolfe.27@dartmouth.edu">email</a>
     <a href="https://github.com/coho905">github</a>
-    <a href="https://en.wikipedia.org/wiki/Spotsylvania_County,_Virginia">📍</a>
+    <a href="https://twitter.com/coliwolfe">twitter</a>
+</footer>
 
-  </div>
+<div class="seal">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="28" height="28" stroke="#874a50" stroke-width="1.5"/>
+        <line x1="16" y1="8" x2="16" y2="24" stroke="#874a50" stroke-width="1"/>
+        <line x1="8" y1="16" x2="24" y2="16" stroke="#874a50" stroke-width="1"/>
+    </svg>
+</div>
+
 </body>
 </html>
