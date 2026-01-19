@@ -1,164 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>about colin wolfe</title>
-  <link rel="icon" type="image/x-icon" href="./favi.png">
-  <style>
-    :root {
-      --bg-dark: #0c0c0c;
-      --fg-light: #f5f5f5;
-      --fg-muted: #b3b3b3;
-      --accent: #66b3ff;
-      --transition: 0.8s cubic-bezier(.25,.6,.3,1);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>colin wolfe website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+        ::selection {
+            background: #874a50;
+            color: #f4f3ef;
+        }
 
-    body {
-      background: var(--bg-dark);
-      color: var(--fg-light);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
-      padding: 2.5rem;
-      max-width: 85%;
-      margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+        body {
+            font-family: 'EB Garamond', 'Noto Serif SC', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.75;
+            color: #2a2a2a;
+            background: #f4f3ef;
+            padding: 16vh 24px 14vh 24px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
 
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.4rem;
-    }
+        a {
+            color: inherit;
+            text-decoration-color: #874a50;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
 
-    .subtitle {
-      font-size: 1rem;
-      color: var(--fg-muted);
-      margin-bottom: 1.8rem;
-    }
+        a:hover {
+            color: #874a50;
+        }
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      color: rgb(231, 227, 227);
-    }
+        header {
+            margin-bottom: 1.5em;
+        }
 
-    .highlight {
-      color: var(--accent);
-      font-weight: 600;
-    }
+        h1 {
+            font-size: 1.3em;
+            font-weight: 400;
+            font-style: italic;
+        }
 
-    .fixed-buttons {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      gap: 12px;
-      z-index: 1000;
-    }
+        h1 span {
+            font-style: normal;
+            color: #888;
+        }
 
-    .fixed-button {
-      padding: 10px 22px;
-      background: var(--fg-light);
-      color: var(--bg-dark);
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.2s;
-      font-size: 1.1rem;
-    }
+        .photo-container {
+            margin: 1.5em 0 2em 0;
+        }
 
-    .fixed-button:hover {
-      transform: translateY(-2px);
-      text-decoration: none;
-    }
+        .photo {
+            width: 100%;
+            max-width: 280px;
+            filter: grayscale(20%);
+            background: #e0dfdc;
+        }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 1.8rem 1.2rem;
-      }
-    }
+        .photo:hover {
+            filter: grayscale(0%);
+        }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 1.2rem;
-    }
+        .photo-caption {
+            font-size: 0.85em;
+            font-style: italic;
+            color: #aaa;
+            margin-top: 0.4em;
+        }
 
-    a:hover {
-      color: var(--accent);
-      text-decoration: none;
-    }
+        .intro {
+            margin-bottom: 2.5em;
+        }
 
-    h3{
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 1.6rem;
-    }
+        .intro p {
+            margin-bottom: 0.8em;
+        }
 
-    h2 {
-      font-size: 1.85rem;
-      margin: 0.7rem 0;
-    }
+        .dim {
+            color: #777;
+        }
 
-    .news-section {
-      margin-top: 0.8rem;
-    }
+        .v-dim {
+            color: #999;
+        }
 
-    footer {
-      margin-top: auto;
-      padding: 1.2rem 0;
-      font-size: 1rem;
-      color: var(--fg-muted);
-    }
-  </style>
+        section {
+            margin-bottom: 2em;
+        }
+
+        .label {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 0.4em;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 0.35em;
+        }
+
+        hr {
+            border: none;
+            margin: 2.5em 0 1.8em 0;
+        }
+
+        hr::before {
+            content: '~';
+            color: #ccc;
+        }
+
+        footer {
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        footer a {
+            margin-right: 1.2em;
+        }
+
+        .seal {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.08;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12vh 20px 10vh 20px;
+            }
+            .photo {
+                max-width: 100%;
+            }
+            .seal {
+                display: none;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <h1>about colin wolfe</h1>
-  <p class="subtitle">a bit more context</p>
 
-  <p style="margin-top: 30px;">
-    I'm an undergrad at <span class="highlight">Dartmouth College</span> studying computer science and electrical engineering.
-    I currently work at the <span class="highlight">Graphmind Lab</span>, the <span class="highlight">Distributed Intelligence Lab</span>, and the <span class="highlight">DALI Lab</span>. Previously, I've worked at the <span class="highlight">Jefferson Lab</span> and <span class="highlight">Probity Inc.</span> I'm interning at <span class="highlight">Nomura</span> in NYC next summer. See the <a href="./experience.html">experience page</a> for more thorough explanations.
-  </p>
+<header>
+    <h1>colin wolfe</h1>
+</header>
 
-  <p>
-    I care deeply about intelligent systems that can engage in creative pursuits and reason on complex problems. I hope the future is embodied intelligence that can perceive and interact with the physical world.
-    I'm also interested in the acquisition of language, AI agency and its ethical ramifications, the future of labor, reinforcement learning for grounding models, the limits of computation, and more.
-  </p>
+<div class="photo-container">
+    <img src="IMG_1575.jpg" alt="" class="photo">
+    <p class="photo-caption">tsim sha tsui, evening</p>
+</div>
 
-  <p>
-    At Dartmouth, I'm a teaching assistant for the computer science department, a brother of the Phi Delta Alpha fraternity, an algorithms tutor, have written for the student newspaper, hosted a radio show on WebDCR, and slept on the green more than once. I like to hike and drive in the Upper Valley as much as possible.
-  </p>
+<div class="intro">
+    <p>Dartmouth College, computer & electrical engineering. Interested in physical and intelligent systems, modern philosophy, and writing.</p>
+    <p class="dim">Virginia, New Hampshire</p>
+</div>
 
-  <h2>news, plans, and current events</h2>
-  <div class="news-section">
-    <p>
-      <span>
-        &nbsp;&nbsp; Current reads - <span class="highlight">Tales from a Robotic World by Floreano</span> and <span class="highlight">No Longer Human by Dazai</span>.<br>
-        &nbsp;&nbsp; This summer I will be taking classes on campus.<br>
-        &nbsp;&nbsp; This fall I will be studying abroad at the <span class="highlight">Chinese University of Hong Kong</span>.<br>
-        &nbsp;&nbsp; Won the 2025 <span class="highlight">Kemeny Prize</span> for most innovative undergraduate computing project at Dartmouth.<br>
-        &nbsp;&nbsp; Named <span class="highlight">Presidential Scholar</span> for research under Professor Santos.
-      </span>
-    </p>
-  </div>
+<section>
+    <p class="label">now</p>
+    <ul>
+        <li>learning Chinese <span class="v-dim">我的中文名字是柯林. 我们可以练习说中文吧。</span></li>
+        <li>working on microprocessors, embedded ai, and chip design</li>
+        <li>research on interpretability; learning honesty in large models</li>
+        <li>writing about intelligence versus computation, and the trust economy</li>
 
-  <footer>
-    always feel free to reach out, on any platform, as i'm constantly on the lookout for new possibilities.
-  </footer>
+    </ul>
+</section>
 
-  <div class="fixed-buttons">
-    <a href="./index.html" class="fixed-button">home</a>
-  </div>
+<section>
+    <p class="label">previously</p>
+    <ul>
+        <li class="">studied at the Chinese University of Hong Kong (Fall 2025)</li>
+        <li class="">graph neural networks for multi-agent debate classification</li>
+        <li class="">FPGA production, morph programming language, and much more</li>
+    </ul>
+</section>
+
+<footer>
+    <p><b>contact</b></p>
+    <a href="mailto:colin.h.wolfe.27@dartmouth.edu">email</a>
+    <a href="https://github.com/coho905">github</a>
+    <a href="https://twitter.com/coliwolfe">twitter</a>
+</footer>
+
+<div class="seal">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="28" height="28" stroke="#874a50" stroke-width="1.5"/>
+        <line x1="16" y1="8" x2="16" y2="24" stroke="#874a50" stroke-width="1"/>
+        <line x1="8" y1="16" x2="24" y2="16" stroke="#874a50" stroke-width="1"/>
+    </svg>
+</div>
+
 </body>
 </html>
